@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Ingresar · Vigilante Virtual</title>
+  <script src="shared/js/auth.js"></script>
+  <link rel="stylesheet" href="shared/css/tokens.css">
+  <link rel="stylesheet" href="shared/css/base.css">
+  <link rel="stylesheet" href="shared/css/components.css">
+  <style>
+    body { display: grid; place-items: center; min-height: 100vh; padding: 24px 16px; }
+    .login { width: min(440px, 100%); }
+    .login .card { padding: 28px; }
+    .login-brand { display: flex; align-items: center; gap: 12px; margin-bottom: 20px; }
+    .login-brand .mark { display: grid; place-items: center; width: 42px; height: 42px; border-radius: 10px; background: var(--accent); color: #fff; }
+    .login-brand b { display: block; font-size: var(--fs-lg); }
+    .login-brand span { font-size: var(--fs-sm); color: var(--text-muted); }
+    form { display: flex; flex-direction: column; gap: 16px; }
+    .roles { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+    .roles label { position: relative; cursor: pointer; }
+    .roles input { position: absolute; opacity: 0; }
+    .roles span {
+      display: flex; flex-direction: column; align-items: center; gap: 6px; text-align: center;
+      padding: 12px 6px; border: 1px solid var(--border-strong); border-radius: var(--radius-sm);
+      background: var(--surface-2); font-size: var(--fs-xs); font-weight: 600; color: var(--text-muted);
+    }
+    .roles input:checked + span { border-color: var(--accent); background: var(--accent-soft); color: var(--text); }
+    .roles input:focus-visible + span { outline: 2px solid var(--accent); outline-offset: 2px; }
+    .pass { position: relative; }
+    .pass .input { width: 100%; padding-right: 44px; }
+    .pass button { position: absolute; right: 4px; top: 50%; transform: translateY(-50%); }
+    .msg { font-size: var(--fs-sm); padding: 10px 12px; border-radius: var(--radius-sm); }
+    .msg.err { background: var(--danger-soft); color: var(--danger); }
+    .msg.ok  { background: var(--ok-soft); color: var(--ok); }
+    .msg.warn{ background: var(--warn-soft); color: var(--warn); }
+    .setup-role { padding: 12px; border: 1px solid var(--border); border-radius: var(--radius-sm); display: flex; flex-direction: column; gap: 8px; }
+    .legal { margin-top: 16px; font-size: var(--fs-xs); color: var(--text-faint); text-align: center; line-height: 1.5; }
+    .linkish { background: none; border: 0; padding: 0; color: var(--text-muted); text-decoration: underline; font-size: var(--fs-xs); }
+  </style>
+</head>
+<body>
+<main class="login">
+  <div class="card">
+    <div class="login-brand">
+      <span class="mark"><svg class="icon icon-lg" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><b>Vigilante Virtual</b><span>Acceso a los dashboards</span></div>
+    </div>
+
+    <div id="msg" class="msg" role="alert" hidden></div>
+
+    <!-- ===== Primera vez: definir claves de demostración ===== -->
+    <form id="setup-form" hidden novalidate>
+      <div>
+        <h1 style="font-size:var(--fs-lg)">Configurar acceso</h1>
+        <p class="small muted" style="margin-top:4px">Primera vez en este navegador. Define una clave para cada perfil. Solo se guarda un hash en este equipo; nunca se sube al repositorio.</p>
+      </div>
+      <div class="setup-role">
+        <strong class="small">Vigilante</strong>
+        <input class="input" type="password" name="vigilante" autocomplete="new-password" placeholder="Clave" aria-label="Clave del vigilante">
+        <input class="input" type="password" name="vigilante2" autocomplete="new-password" placeholder="Repite la clave" aria-label="Repite la clave del vigilante">
+      </div>
+      <div class="setup-role">
+        <strong class="small">Administrador del sitio</strong>
+        <input class="input" type="password" name="admin" autocomplete="new-password" placeholder="Clave" aria-label="Clave del administrador">
+        <input class="input" type="password" name="admin2" autocomplete="new-password" placeholder="Repite la clave" aria-label="Repite la clave del administrador">
+      </div>
+      <div class="setup-role">
+        <strong class="small">Torre de Control (jefe mayor)</strong>
+        <input class="input" type="password" name="general" autocomplete="new-password" placeholder="Clave" aria-label="Clave de la Torre de Control">
+        <input class="input" type="password" name="general2" autocomplete="new-password" placeholder="Repite la clave" aria-label="Repite la clave de la Torre de Control">
+      </div>
+      <p class="xsmall faint">Mínimo 8 caracteres, con letras y números. No se aceptan claves de prueba como 1234, 2002 o 9999. Usa una clave distinta para cada perfil.</p>
+      <button class="btn btn-primary btn-lg" type="submit">Guardar claves</button>
+    </form>
+
+    <!-- ===== Ingreso ===== -->
+    <form id="login-form" hidden novalidate>
+      <h1 style="font-size:var(--fs-lg)">Ingresar</h1>
+      <fieldset style="border:0;padding:0;margin:0">
+        <legend class="small muted" style="font-weight:600;margin-bottom:8px">Perfil</legend>
+        <div class="roles">
+          <label><input type="radio" name="role" value="vigilante" checked><span>
+            <svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Vigilante</span></label>
+          <label><input type="radio" name="role" value="admin"><span>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Administrador</span></label>
+          <label><input type="radio" name="role" value="general"><span>
+            <svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Torre de Control</span></label>
+        </div>
+      </fieldset>
+      <div class="field">
+        <label for="pass">Clave</label>
+        <div class="pass">
+          <input class="input" type="password" id="pass" name="pass" autocomplete="current-password" required>
+          <button class="btn btn-sm btn-ghost btn-icon" type="button" id="toggle-pass" aria-label="Mostrar clave" aria-pressed="false">
+            <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M2 12s3.5-7 10-7 10 7 10 7-3.5 7-10 7S2 12 2 12z"/><circle cx="12" cy="12" r="3"/></svg>
+          </button>
+        </div>
+      </div>
+      <button class="btn btn-primary btn-lg" type="submit" id="login-btn">Ingresar</button>
+      <div class="notice small">
+        <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+        <div>En producción, después de la clave se pide el <strong>segundo factor</strong> y el servidor valida la sesión. Esta pantalla es la maqueta del flujo.</div>
+      </div>
+      <p style="text-align:center"><button class="linkish" type="button" id="reset-demo">Restablecer claves de demostración</button></p>
+    </form>
+
+    <!-- ===== Restablecer (requiere la clave de la Torre de Control) ===== -->
+    <form id="reset-form" hidden novalidate>
+      <h1 style="font-size:var(--fs-lg)">Restablecer claves</h1>
+      <p class="small muted">Para cambiar las claves de los tres perfiles se necesita la clave de la <strong>Torre de Control</strong>.</p>
+      <div class="field">
+        <label for="reset-pass">Clave de la Torre de Control</label>
+        <input class="input" type="password" id="reset-pass" autocomplete="current-password">
+      </div>
+      <div class="row" style="justify-content:flex-end">
+        <button class="btn" type="button" id="reset-cancel">Cancelar</button>
+        <button class="btn btn-danger" type="submit">Restablecer</button>
+      </div>
+      <p class="xsmall faint">Si nadie recuerda esa clave, borra los datos del sitio en la configuración del navegador.</p>
+    </form>
+  </div>
+
+  <p class="legal">
+    Acceso restringido a personal autorizado. Cada ingreso queda registrado.<br>
+    Los datos personales se tratan según la Ley 1581 de 2012.<br>
+    © 2026 PGD · Todos los derechos reservados.
+  </p>
+</main>
+
+<!-- Cuentas de demostración locales (en .gitignore). Si el archivo no existe, se piden claves nuevas. -->
+<script src="shared/js/demo-accounts.local.js" onerror="void 0"></script>
+<script src="shared/js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,6 @@
+# Claves y cuentas de demostración locales: nunca al repositorio
+*.local.js
+*.local.txt
+.env
+.env.*
+!.env.example
