@@ -1,0 +1,42 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Vigilante Virtual · Dashboards</title>
+  <link rel="stylesheet" href="shared/css/tokens.css">
+  <link rel="stylesheet" href="shared/css/base.css">
+  <link rel="stylesheet" href="shared/css/components.css">
+  <style>
+    main { max-width: 880px; margin: 0 auto; padding: 48px 16px; }
+    .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
+    .choice { display: block; padding: 20px; color: var(--text); text-decoration: none; }
+    a.choice:hover { border-color: var(--accent); text-decoration: none; }
+    .choice h2 { margin: 8px 0 4px; }
+    .choice p { color: var(--text-muted); font-size: var(--fs-sm); }
+  </style>
+</head>
+<body>
+<main>
+  <h1>Vigilante Virtual · Dashboards</h1>
+  <p class="muted" style="margin-top:4px">Índice de desarrollo. Tres dashboards separados, uno por rol.</p>
+  <div class="choices">
+    <a class="card choice" href="vigilante/index.html">
+      <span class="badge badge-ok">Listo para revisión</span>
+      <h2>Vigilante</h2>
+      <p>Guardia de portería: Panel, Accesos, Cámaras, Novedades e Historial.</p>
+    </a>
+    <a class="card choice" href="admin/index.html">
+      <span class="badge badge-ok">Listo para revisión</span>
+      <h2>Administrador del cliente</h2>
+      <p>Configuración de su sitio: personal, destinos, horarios, dispositivos, vigilantes, Argos, privacidad y reportes.</p>
+    </a>
+    <a class="card choice" href="general/index.html">
+      <span class="badge badge-ok">Listo para revisión</span>
+      <h2>General (jefe mayor)</h2>
+      <p>Torre de Control: todos los sitios, incidentes escalados, cámaras, clientes, usuarios, Argos, Ley 1581, despliegues y auditoría.</p>
+    </a>
+  </div>
+</main>
+</body>
+</html>

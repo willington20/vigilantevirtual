@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cumplimiento · Torre de Control</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Torre de Control · PGD</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Monitoreo</a>
+      <a href="sitio.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sitios</a>
+      <a href="incidentes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Incidentes<span class="count" data-count="escaladas">4</span></a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="clientes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Clientes</a>
+      <a href="usuarios.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Usuarios</a>
+      <a href="argos.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Argos</a>
+      <a href="cumplimiento.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Cumplimiento</a>
+      <a href="despliegues.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Despliegues</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Vista general<br>5 clientes · 6 sitios</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Torre de Control</strong><span>Todos los clientes y sitios</span></div>
+    <span class="badge badge-warn hide-sm"><span class="dot dot-live"></span> 1 sitio en contingencia</span>
+    <div class="topbar-spacer"></div>
+    <div id="clock" class="topbar-clock mono">--:--:--</div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">MH</span>
+      <div class="user-name"><div class="small">M. Herrera</div><div class="xsmall muted">Supervisión PGD</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Cumplimiento · Ley 1581 de 2012</h1>
+        <p>Consentimientos, retención y derechos de los titulares en todos los sitios.</p>
+      </div>
+    </div>
+
+    <div class="notice notice-warn" style="margin-bottom:var(--sp-4)"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg><div>Esta vista es una guía técnica, <strong>no asesoría jurídica</strong>. Los plazos y textos deben aprobarse con un abogado especialista antes de salir a producción.</div></div>
+
+    <section class="kpis">
+      <div class="card kpi"><div class="kpi-label">Consentimientos registrados</div><div class="kpi-value">16.882</div><div class="kpi-note">Con fecha, versión del texto y usuario</div></div>
+      <div class="card kpi is-warn"><div class="kpi-label">Sitios con algo pendiente</div><div class="kpi-value">3</div><div class="kpi-note">De 6</div></div>
+      <div class="card kpi"><div class="kpi-label">Solicitudes de titulares</div><div class="kpi-value">2</div><div class="kpi-note">Abiertas · ninguna vencida</div></div>
+      <div class="card kpi"><div class="kpi-label">Fotos borradas por retención</div><div class="kpi-value">1.204</div><div class="kpi-note">Últimos 30 días</div></div>
+    </section>
+
+    <section class="card">
+      <div class="card-head"><h2>Estado por sitio</h2></div>
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Sitio</th><th>Leyenda</th><th>Consentimientos</th><th>Fotos visitantes</th><th>Video</th><th>Último borrado automático</th><th>Estado</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Bodega Paramericana</strong></td><td class="mono">v1.0</td><td class="mono">412</td><td>15 días</td><td>30 días</td><td class="small">Hoy 03:00</td><td><span class="badge badge-ok">Al día</span></td></tr>
+            <tr><td><strong>Universidad Andina · Sede Norte</strong></td><td class="mono">v1.0</td><td class="mono">9.240</td><td>7 días</td><td>30 días</td><td class="small">Pendiente (sin internet)</td><td><span class="badge badge-warn">Borrado en cola</span></td></tr>
+            <tr><td><strong>Universidad Andina · Sede Centro</strong></td><td class="mono">v1.0</td><td class="mono">6.533</td><td>7 días</td><td>30 días</td><td class="small">Hoy 03:00</td><td><span class="badge badge-ok">Al día</span></td></tr>
+            <tr><td><strong>Conjunto Los Robles</strong></td><td class="mono">v0.9</td><td class="mono">388</td><td>15 días</td><td>30 días</td><td class="small">Hoy 03:00</td><td><span class="badge badge-warn">Leyenda desactualizada</span></td></tr>
+            <tr><td><strong>Logística del Sur · Bodega 2</strong></td><td class="mono">v1.0</td><td class="mono">97</td><td>15 días</td><td>30 días</td><td class="small">Hoy 03:00</td><td><span class="badge badge-ok">Al día</span></td></tr>
+            <tr><td><strong>Torres del Parque</strong></td><td class="mono">v1.0</td><td class="mono">212</td><td>Por definir</td><td>Por definir</td><td class="small">—</td><td><span class="badge badge-danger">Falta definir retención</span></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="grid-2 grid-2-even" style="margin-top:var(--sp-4)">
+      <section class="card">
+        <div class="card-head"><h2>Solicitudes de titulares</h2><span class="xsmall muted">Consulta, corrección, supresión</span></div>
+        <div class="card-body flush table-wrap">
+          <table class="table">
+            <thead><tr><th>Tipo</th><th>Sitio</th><th>Recibida</th><th>Vence</th><th>Estado</th></tr></thead>
+            <tbody>
+            <tr><td>Supresión de datos</td><td>Conjunto Los Robles</td><td class="mono">01/10</td><td class="mono">15/10</td><td><span class="badge badge-warn">En trámite</span></td></tr>
+            <tr><td>Consulta</td><td>Bodega Paramericana</td><td class="mono">03/10</td><td class="mono">17/10</td><td><span class="badge badge-info">Nueva</span></td></tr>
+            <tr><td>Corrección</td><td>Universidad Andina · Sede Norte</td><td class="mono">28/09</td><td class="mono">10/10</td><td><span class="badge badge-ok">Respondida</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-head"><h2>Pendientes legales</h2></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Definir responsable y encargado del tratamiento (PGD o el cliente)</strong></div><span class="badge badge-warn">Pendiente</span></li>
+          <li class="setting"><div class="setting-text"><strong>Contratos de transmisión de datos con cada cliente</strong></div><span class="badge badge-warn">Pendiente</span></li>
+          <li class="setting"><div class="setting-text"><strong>Política de tratamiento y manual interno</strong></div><span class="badge badge-ok">Listo</span></li>
+          <li class="setting"><div class="setting-text"><strong>Registro en el RNBD, si aplica</strong></div><span class="badge badge-warn">Pendiente</span></li>
+          <li class="setting"><div class="setting-text"><strong>Tratamiento de menores de edad (universidades y residencias)</strong></div><span class="badge badge-warn">Pendiente</span></li>
+          <li class="setting"><div class="setting-text"><strong>Decidir si los datos se guardan en Colombia o fuera</strong></div><span class="badge badge-warn">Pendiente</span></li>
+          <li class="setting"><div class="setting-text"><strong>Plazos de retención por tipo de dato aprobados por legal</strong></div><span class="badge badge-warn">Pendiente</span></li>
+          <li class="setting"><div class="setting-text"><strong>Revisión por abogado especialista antes de producción</strong></div><span class="badge badge-warn">Pendiente</span></li>
+        </ul>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/general.js"></script>
+</body>
+</html>

@@ -1,0 +1,117 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Cámaras · Vigilante</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/vigilante.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Puesto del vigilante</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Panel<span class="count" data-count="alerts">3</span></a>
+      <a href="accesos.html"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><circle cx="14.5" cy="12" r="1"/></svg>Accesos</a>
+      <a href="camaras.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="novedades.html"><svg class="icon" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Novedades</a>
+      <a href="historial.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</a>
+    </nav>
+    <div class="sidebar-foot">Turno 06:00 – 14:00<br>Portería principal</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Portería principal</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <div style="text-align:right">
+      <div id="clock" class="topbar-clock mono">--:--:--</div>
+      <div id="clock-date" class="xsmall muted topbar-clock-date"></div>
+    </div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">CR</span>
+      <div class="user-name"><div class="small">Carlos Ríos</div><div class="xsmall muted">Vigilante</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-head">
+      <div>
+        <h1>Cámaras</h1>
+        <p>Video del servicio de ingesta: portería, videoportero y kiosco. <span id="cam-summary" class="badge badge-warn">— en línea</span></p>
+      </div>
+      <div class="row">
+        <div class="segmented" role="group" aria-label="Cantidad de cámaras">
+          <button type="button" data-layout-btn="1" aria-pressed="false">1</button>
+          <button type="button" data-layout-btn="4" aria-pressed="true">4</button>
+          <button type="button" data-layout-btn="9" aria-pressed="false">9</button>
+        </div>
+        <button class="btn" type="button" id="cams-fullscreen">
+          <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7"/></svg>Pantalla completa</button>
+      </div>
+    </div>
+
+    <div class="cams-layout">
+      <!-- Lista de cámaras con estado -->
+      <section class="card">
+        <div class="card-head"><h2>Cámaras del sitio</h2></div>
+        <ul class="cam-list" id="cam-list"></ul>
+      </section>
+
+      <!-- Mosaico 1 / 4 / 9 -->
+      <section class="cam-grid-wrap">
+        <div class="cam-grid" id="cam-grid" data-layout="4"></div>
+      </section>
+    </div>
+
+    <!-- ===== Grabaciones por rango de hora ===== -->
+    <section class="card" style="margin-top:var(--sp-4)">
+      <div class="card-head"><h2>Grabaciones</h2></div>
+      <div class="card-body">
+        <form id="rec-form" class="filters" style="margin-bottom:0">
+          <div class="field">
+            <label for="rec-cam">Cámara</label>
+            <select class="select" id="rec-cam"></select>
+          </div>
+          <div class="field">
+            <label for="rec-date">Fecha</label>
+            <input class="input" type="date" id="rec-date" value="2026-10-05">
+          </div>
+          <div class="field">
+            <label for="rec-from">Desde</label>
+            <input class="input" type="time" id="rec-from" value="08:00">
+          </div>
+          <div class="field">
+            <label for="rec-to">Hasta</label>
+            <input class="input" type="time" id="rec-to" value="10:00">
+          </div>
+          <button class="btn btn-primary" type="submit">Buscar grabación</button>
+        </form>
+
+        <div id="rec-result" hidden style="margin-top:var(--sp-5)">
+          <h3 id="rec-title" style="margin-bottom:var(--sp-3)"></h3>
+          <div style="max-width:720px" id="rec-player"></div>
+          <div id="rec-timeline" class="timeline" style="max-width:720px"></div>
+          <div id="rec-scale" class="timeline-scale" style="max-width:720px"></div>
+          <div class="row xsmall muted" style="margin-top:var(--sp-2)">
+            <span class="row"><span style="width:14px;height:8px;border-radius:2px;background:color-mix(in srgb, var(--accent) 55%, transparent)"></span> Grabado</span>
+            <span class="row"><span style="width:3px;height:12px;border-radius:2px;background:var(--danger)"></span> Evento de Argos</span>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+</div>
+
+<script src="js/vigilante.js"></script>
+</body>
+</html>

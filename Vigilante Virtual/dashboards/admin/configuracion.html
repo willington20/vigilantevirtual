@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Configuración · Administración</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Administrador del sitio</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Resumen</a>
+      <a href="personal.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Personal</a>
+      <a href="destinos.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Destinos</a>
+      <a href="horarios.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Horarios</a>
+      <a href="dispositivos.html"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Dispositivos</a>
+      <a href="vigilantes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><circle cx="12" cy="10" r="2.5"/><path d="M8.5 16c.8-1.5 2-2.2 3.5-2.2s2.7.7 3.5 2.2"/></svg>Vigilantes</a>
+      <a href="configuracion.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Configuración</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Paramericana S.A.S.<br>Plan Portero Vigilante · 1 sitio</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Paramericana S.A.S.</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">AV</span>
+      <div class="user-name"><div class="small">Andrea Vélez</div><div class="xsmall muted">Administración del sitio</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Configuración del sitio</h1>
+        <p>Cada cambio queda en auditoría con tu usuario, la hora y el valor anterior.</p>
+      </div>
+    </div>
+
+    <form data-settings class="stack">
+      <section class="card">
+        <div class="card-head"><h2>Sitio</h2></div>
+        <div class="card-body">
+          <div class="form-grid">
+            <div class="field"><label for="site-name">Nombre</label><input class="input" id="site-name" value="Bodega Paramericana"></div>
+            <div class="field"><label for="site-type">Tipo de sitio</label>
+              <select class="select" id="site-type"><option value="bodega" selected>Oficinas o bodegas</option><option value="universidad">Universidad</option><option value="residencia">Residencia</option></select>
+              <span class="hint" id="site-type-hint"></span></div>
+            <div class="field"><label for="site-addr">Dirección</label><input class="input" id="site-addr" value="Calle 13 # 68-40"></div>
+            <div class="field"><label for="site-tz">Zona horaria</label><select class="select" id="site-tz"><option>America/Bogota (UTC−5)</option></select></div>
+          </div>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Acciones automáticas de Argos</h2><span class="xsmall muted">Cada acción queda auditada</span></div>
+        <ul class="settings">
+            <li class="setting"><div class="setting-text"><strong>Crear la novedad</strong><span>Registra el evento en Novedades sin esperar al vigilante</span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Crear la novedad</span></label></div></li>
+            <li class="setting"><div class="setting-text"><strong>Sonar la alerta en el puesto</strong><span>Pitido y alerta en el Panel del vigilante</span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Sonar la alerta en el puesto</span></label></div></li>
+            <li class="setting"><div class="setting-text"><strong>Enfocar la cámara del evento</strong><span>Muestra la cámara en el puesto del vigilante</span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Enfocar la cámara del evento</span></label></div></li>
+            <li class="setting"><div class="setting-text"><strong>Escalar a la Torre de Control</strong><span>Si nadie atiende la alerta a tiempo</span></div>
+              <div class="row"><input class="input" type="number" value="2" min="1" max="10" style="width:70px" aria-label="Minutos antes de escalar"><span class="small muted">min</span><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Escalar a la Torre de Control</span></label></div></li>
+            <li class="setting"><div class="setting-text"><strong>Apertura automática</strong><span>Solo si el rostro, la tarjeta o el QR están autorizados y es su horario</span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Apertura automática</span></label></div></li>
+            <li class="setting"><div class="setting-text"><strong>Validación de conexión</strong><span>Revisa cada minuto kiosco, videoportero, cámaras, impresoras, lector, controlador y relé</span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Validación de conexión</span></label></div></li>
+            <li class="setting"><div class="setting-text"><strong>Abrir a distancia sin confirmación de portería</strong><span>Argos nunca abre la puerta por sí solo en un caso dudoso</span></div>
+              <div class="row"><span class="locked"><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg> Bloqueado por política</span><label class="switch"><input type="checkbox" disabled><span class="switch-track"></span><span class="sr-only">Abrir sin confirmación (bloqueado)</span></label></div></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Privacidad y retención (Ley 1581)</h2><span class="badge badge-warn">Plazos por confirmar con legal</span></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Fotos de visitantes temporales</strong><span>Se borran automáticamente al vencer</span></div>
+            <select class="select" aria-label="Retención de fotos de visitantes"><option>7 días</option><option selected>15 días</option><option>30 días</option></select></li>
+          <li class="setting"><div class="setting-text"><strong>Registros de acceso</strong><span>Historial de ingresos y salidas</span></div>
+            <select class="select" aria-label="Retención de registros de acceso"><option>6 meses</option><option selected>1 año</option><option>2 años</option></select></li>
+          <li class="setting"><div class="setting-text"><strong>Video grabado</strong><span>Se guarda en el sitio, no en la nube</span></div>
+            <select class="select" aria-label="Retención de video"><option>15 días</option><option selected>30 días</option><option>60 días</option></select></li>
+            <li class="setting"><div class="setting-text"><strong>Borrar plantilla facial al desactivar a una persona</strong><span>Del personal se guarda la plantilla, nunca la foto en claro</span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Borrar plantilla facial al desactivar a una persona</span></label></div></li>
+          <li class="setting"><div class="setting-text"><strong>Leyenda de tratamiento de datos</strong><span>Versión 1.0 · se muestra antes de tomar foto o datos</span></div>
+            <button class="btn btn-sm" type="button">Ver texto</button></li>
+        </ul>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Notificaciones para ti</h2></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Correo para el resumen diario</strong></div>
+            <input class="input" type="email" value="admin@paramericana.example" aria-label="Correo del resumen diario" style="min-width:240px"></li>
+            <li class="setting"><div class="setting-text"><strong>Avisarme si un equipo deja de responder</strong><span>Además de la novedad para el vigilante</span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Avisarme si un equipo deja de responder</span></label></div></li>
+            <li class="setting"><div class="setting-text"><strong>Avisarme cuando una alerta se escala a la Torre</strong><span></span></div>
+              <div class="row"><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Avisarme cuando una alerta se escala a la Torre</span></label></div></li>
+        </ul>
+      </section>
+
+      <div class="save-bar">
+        <span class="xsmall muted" data-dirty-note>Sin cambios</span>
+        <button class="btn btn-primary" type="submit" data-save disabled>Guardar cambios</button>
+      </div>
+    </form>
+
+  </main>
+</div>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

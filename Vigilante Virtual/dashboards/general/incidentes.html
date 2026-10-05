@@ -1,0 +1,169 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Incidentes · Torre de Control</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Torre de Control · PGD</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Monitoreo</a>
+      <a href="sitio.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sitios</a>
+      <a href="incidentes.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Incidentes<span class="count" data-count="escaladas">4</span></a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="clientes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Clientes</a>
+      <a href="usuarios.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Usuarios</a>
+      <a href="argos.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Argos</a>
+      <a href="cumplimiento.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Cumplimiento</a>
+      <a href="despliegues.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Despliegues</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Vista general<br>5 clientes · 6 sitios</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Torre de Control</strong><span>Todos los clientes y sitios</span></div>
+    <span class="badge badge-warn hide-sm"><span class="dot dot-live"></span> 1 sitio en contingencia</span>
+    <div class="topbar-spacer"></div>
+    <div id="clock" class="topbar-clock mono">--:--:--</div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">MH</span>
+      <div class="user-name"><div class="small">M. Herrera</div><div class="xsmall muted">Supervisión PGD</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Incidentes</h1>
+        <p>Alertas escaladas desde todos los sitios. La Torre las toma, decide y las cierra con comentario.</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="segmented" role="group" aria-label="Estado">
+        <button type="button" data-filter="todas" aria-pressed="true">Todos</button>
+        <button type="button" data-filter="abierta" aria-pressed="false">Escalados</button>
+        <button type="button" data-filter="atencion" aria-pressed="false">En atención</button>
+        <button type="button" data-filter="cerrado" aria-pressed="false">Cerrados</button>
+      </div>
+      <select class="select" id="filter-type" aria-label="Sitio"><option value="">Todos los sitios</option><option value="paramericana">Bodega Paramericana</option><option value="andina-norte">Universidad Andina · Sede Norte</option><option value="andina-centro">Universidad Andina · Sede Centro</option><option value="robles">Conjunto Los Robles</option><option value="logistica-sur">Logística del Sur · Bodega 2</option><option value="torres-parque">Torres del Parque</option></select>
+      <input class="input" type="search" id="filter-search" placeholder="Buscar…" aria-label="Buscar incidentes" style="flex:1;min-width:180px">
+    </div>
+
+    <section class="card">
+      <ul class="incidents" data-filterable>
+        <li class="incident" data-sev="alta" data-status="abierta" data-type="robles">
+          <div class="incident-top">
+            <div><p class="incident-title">Puerta forzada · Torre 3</p>
+              <div class="incident-meta"><span><strong>Conjunto Los Robles</strong></span><span>Sensor de puerta</span><span class="mono">10:04</span></div></div>
+            <span class="badge badge-danger incident-state">Escalada</span>
+          </div><p class="incident-note">Nadie atendió en el puesto en 2 min</p>
+          <div class="incident-actions">
+            <button class="btn btn-sm" type="button" data-take>Tomar</button>
+            <a class="btn btn-sm" href="sitio.html?id=robles">Ver sitio</a>
+            <a class="btn btn-sm" href="camaras.html">Cámaras</a>
+            <button class="btn btn-sm btn-primary" type="button" data-close-incident>Cerrar</button>
+          </div>
+        </li>
+        <li class="incident" data-sev="alta" data-status="abierta" data-type="paramericana">
+          <div class="incident-top">
+            <div><p class="incident-title">Persona merodeando el perímetro</p>
+              <div class="incident-meta"><span><strong>Bodega Paramericana</strong></span><span>Argos · riesgo 0.84</span><span class="mono">10:16</span></div></div>
+            <span class="badge badge-danger incident-state">Escalada</span>
+          </div><p class="incident-note">Escalada a las 10:18</p>
+          <div class="incident-actions">
+            <button class="btn btn-sm" type="button" data-take>Tomar</button>
+            <a class="btn btn-sm" href="sitio.html?id=paramericana">Ver sitio</a>
+            <a class="btn btn-sm" href="camaras.html">Cámaras</a>
+            <button class="btn btn-sm btn-primary" type="button" data-close-incident>Cerrar</button>
+          </div>
+        </li>
+        <li class="incident" data-sev="alta" data-status="atencion" data-type="andina-norte">
+          <div class="incident-top">
+            <div><p class="incident-title">Sitio sin conexión a internet</p>
+              <div class="incident-meta"><span><strong>Universidad Andina · Sede Norte</strong></span><span>Validación de equipos</span><span class="mono">09:55</span></div></div>
+            <span class="badge badge-info incident-state">En atención · M. Herrera</span>
+          </div><p class="incident-note">El hub opera con la lista local</p>
+          <div class="incident-actions">
+            
+            <a class="btn btn-sm" href="sitio.html?id=andina-norte">Ver sitio</a>
+            <a class="btn btn-sm" href="camaras.html">Cámaras</a>
+            <button class="btn btn-sm btn-primary" type="button" data-close-incident>Cerrar</button>
+          </div>
+        </li>
+        <li class="incident" data-sev="media" data-status="abierta" data-type="logistica-sur">
+          <div class="incident-top">
+            <div><p class="incident-title">Videoportero no responde</p>
+              <div class="incident-meta"><span><strong>Logística del Sur · Bodega 2</strong></span><span>Validación de equipos</span><span class="mono">09:31</span></div></div>
+            <span class="badge badge-danger incident-state">Escalada</span>
+          </div><p class="incident-note">Entran por kiosco y tarjeta</p>
+          <div class="incident-actions">
+            <button class="btn btn-sm" type="button" data-take>Tomar</button>
+            <a class="btn btn-sm" href="sitio.html?id=logistica-sur">Ver sitio</a>
+            <a class="btn btn-sm" href="camaras.html">Cámaras</a>
+            <button class="btn btn-sm btn-primary" type="button" data-close-incident>Cerrar</button>
+          </div>
+        </li>
+        <li class="incident is-closed" data-sev="media" data-status="cerrado" data-type="robles">
+          <div class="incident-top">
+            <div><p class="incident-title">Persona en zona común fuera de horario</p>
+              <div class="incident-meta"><span><strong>Conjunto Los Robles</strong></span><span>Argos · riesgo 0.58</span><span class="mono">09:30</span></div></div>
+            <span class="badge badge-offline incident-state">Falsa alarma</span>
+          </div><p class="incident-note">Falsa alarma · 09:36 · M. Herrera · Residente con permiso de administración.</p>
+        </li>
+        <li class="incident is-closed" data-sev="baja" data-status="cerrado" data-type="paramericana">
+          <div class="incident-top">
+            <div><p class="incident-title">Impresora de etiquetas sin papel</p>
+              <div class="incident-meta"><span><strong>Bodega Paramericana</strong></span><span>Validación de equipos</span><span class="mono">06:31</span></div></div>
+            <span class="badge badge-ok incident-state">Resuelto</span>
+          </div><p class="incident-note">Resuelto · 06:40 · Carlos Ríos (en el puesto) · Se cambió el rollo.</p>
+        </li>
+        <li class="incident is-closed" data-sev="media" data-status="cerrado" data-type="andina-centro">
+          <div class="incident-top">
+            <div><p class="incident-title">Rostro sin coincidencia 3 veces</p>
+              <div class="incident-meta"><span><strong>Universidad Andina · Sede Centro</strong></span><span>Videoportero</span><span class="mono">08:12</span></div></div>
+            <span class="badge badge-ok incident-state">Resuelto</span>
+          </div><p class="incident-note">Resuelto · 08:20 · M. Herrera · Estudiante con carnet nuevo; entró por QR.</p>
+        </li>
+      </ul>
+      <p class="empty" id="filter-empty" hidden>No hay incidentes con esos filtros.</p>
+    </section>
+
+  </main>
+</div>
+
+<dialog class="modal" id="modal-close" aria-labelledby="close-title">
+  <form id="close-form">
+    <div class="modal-head"><h2 id="close-title">Cerrar incidente</h2><button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <p class="small muted">Incidente: <strong id="close-what" style="color:var(--text)"></strong></p>
+      <div class="field"><label for="close-result">Resultado</label>
+        <select class="select" id="close-result"><option>Resuelto</option><option>Falsa alarma</option><option>Escalado a autoridades</option></select></div>
+      <div class="field"><label for="close-comment">Comentario (obligatorio)</label>
+        <textarea class="textarea" id="close-comment" placeholder="Qué se verificó y qué se hizo."></textarea>
+        <span id="close-error" class="xsmall" style="color:var(--danger)" hidden>Escribe un comentario antes de cerrar.</span></div>
+      <p class="xsmall faint">Queda en la auditoría global. Las falsas alarmas alimentan el entrenamiento controlado de Argos.</p>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit">Cerrar incidente</button></div>
+  </form>
+</dialog>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/general.js"></script>
+</body>
+</html>

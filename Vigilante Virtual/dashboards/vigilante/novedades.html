@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Novedades · Vigilante</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/vigilante.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Puesto del vigilante</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Panel<span class="count" data-count="alerts">3</span></a>
+      <a href="accesos.html"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><circle cx="14.5" cy="12" r="1"/></svg>Accesos</a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="novedades.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Novedades</a>
+      <a href="historial.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</a>
+    </nav>
+    <div class="sidebar-foot">Turno 06:00 – 14:00<br>Portería principal</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Portería principal</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <div style="text-align:right">
+      <div id="clock" class="topbar-clock mono">--:--:--</div>
+      <div id="clock-date" class="xsmall muted topbar-clock-date"></div>
+    </div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">CR</span>
+      <div class="user-name"><div class="small">Carlos Ríos</div><div class="xsmall muted">Vigilante</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-head">
+      <div>
+        <h1>Novedades</h1>
+        <p>Alertas de Argos, sensores de puerta y validación de equipos del turno. Cada una se cierra con comentario.</p>
+      </div>
+    </div>
+
+    <div class="filters">
+      <div class="segmented" role="group" aria-label="Estado">
+        <button type="button" data-filter="todas" aria-pressed="true">Todas</button>
+        <button type="button" data-filter="abierta" aria-pressed="false">Abiertas</button>
+        <button type="button" data-filter="atendida" aria-pressed="false">Atendidas</button>
+        <button type="button" data-filter="falsa" aria-pressed="false">Falsa alarma</button>
+      </div>
+      <select class="select" id="filter-type" aria-label="Origen">
+        <option value="">Todos los orígenes</option>
+        <option value="argos">Argos</option>
+        <option value="sensor">Sensor de puerta</option>
+        <option value="equipo">Validación de equipos</option>
+        <option value="acceso">Acceso denegado</option>
+      </select>
+      <input class="input" type="search" id="filter-search" placeholder="Buscar…" aria-label="Buscar en novedades">
+    </div>
+
+    <section class="card">
+      <ul class="alerts news-list" data-filterable>
+
+        <li class="alert" data-sev="alta" data-status="abierta" data-type="argos">
+          <div class="alert-top">
+            <div>
+              <p class="alert-title">Persona merodeando el perímetro</p>
+              <div class="alert-meta"><span>Argos</span><span>Perímetro oriental</span><span class="mono">10:16</span><span class="argos-score">Riesgo 0.84</span></div>
+            </div>
+            <span class="badge badge-danger alert-state">Nueva</span>
+          </div>
+          <p class="alert-escalate" data-seconds="98"><span class="dot dot-live"></span><span class="esc-text">Se escala a la Torre en 1:38</span></p>
+          <div class="alert-actions">
+            <button class="btn btn-sm" type="button" data-view-cam="cam-08" data-title="Perímetro oriental · persona merodeando" data-time="10:16">Ver cámara</button>
+            <button class="btn btn-sm btn-ok" type="button" data-resolve="atendida">Atendida</button>
+            <button class="btn btn-sm btn-ghost" type="button" data-resolve="falsa">Falsa alarma</button>
+          </div>
+        </li>
+
+        <li class="alert" data-sev="media" data-status="abierta" data-type="sensor">
+          <div class="alert-top">
+            <div>
+              <p class="alert-title">Puerta del muelle abierta más de 3 min</p>
+              <div class="alert-meta"><span>Sensor de puerta</span><span>Muelle de carga 1</span><span class="mono">10:09</span></div>
+            </div>
+            <span class="badge badge-warn alert-state">Abierta</span>
+          </div>
+          <p class="alert-escalate" data-seconds="41"><span class="dot dot-live"></span><span class="esc-text">Se escala a la Torre en 0:41</span></p>
+          <div class="alert-actions">
+            <button class="btn btn-sm" type="button" data-view-cam="cam-05" data-title="Muelle de carga 1 · puerta abierta" data-time="10:09">Ver cámara</button>
+            <button class="btn btn-sm btn-ok" type="button" data-resolve="atendida">Atendida</button>
+            <button class="btn btn-sm btn-ghost" type="button" data-resolve="falsa">Falsa alarma</button>
+          </div>
+        </li>
+
+        <li class="alert" data-sev="baja" data-status="abierta" data-type="equipo">
+          <div class="alert-top">
+            <div>
+              <p class="alert-title">Cámara Pasillo B sin señal</p>
+              <div class="alert-meta"><span>Validación de conexión</span><span>Bodega</span><span class="mono">09:42</span></div>
+            </div>
+            <span class="badge badge-info alert-state">Equipo</span>
+          </div>
+          <div class="alert-actions">
+            <button class="btn btn-sm btn-ok" type="button" data-resolve="atendida">Atendida</button>
+            <button class="btn btn-sm btn-ghost" type="button" data-resolve="falsa">Falsa alarma</button>
+          </div>
+        </li>
+
+        <li class="alert is-resolved" data-sev="media" data-status="atendida" data-type="acceso">
+          <div class="alert-top">
+            <div>
+              <p class="alert-title">QR vencido en la puerta principal</p>
+              <div class="alert-meta"><span>Lector QR</span><span>Puerta principal</span><span class="mono">10:07</span></div>
+            </div>
+            <span class="badge badge-ok alert-state">Atendida</span>
+          </div>
+          <p class="alert-resolution">Atendida · 10:09 · Carlos Ríos · Visitante de ayer, se le indicó registrarse en el kiosco.</p>
+        </li>
+
+        <li class="alert is-resolved" data-sev="alta" data-status="falsa" data-type="argos">
+          <div class="alert-top">
+            <div>
+              <p class="alert-title">Movimiento en bodega fuera de horario</p>
+              <div class="alert-meta"><span>Argos</span><span>Pasillo A</span><span class="mono">07:48</span><span class="argos-score">Riesgo 0.62</span></div>
+            </div>
+            <span class="badge badge-offline alert-state">Falsa alarma</span>
+          </div>
+          <p class="alert-resolution">Falsa alarma · 07:51 · Carlos Ríos · Personal de aseo con turno autorizado, verificado por cámara.</p>
+        </li>
+
+        <li class="alert is-resolved" data-sev="media" data-status="atendida" data-type="acceso">
+          <div class="alert-top">
+            <div>
+              <p class="alert-title">Rostro reconocido fuera de horario</p>
+              <div class="alert-meta"><span>Videoportero</span><span>Puerta principal</span><span class="mono">09:51</span></div>
+            </div>
+            <span class="badge badge-ok alert-state">Atendida</span>
+          </div>
+          <p class="alert-resolution">Atendida · 09:53 · Carlos Ríos · Mario León llegó antes de su turno; esperó hasta las 10:00.</p>
+        </li>
+
+        <li class="alert is-resolved" data-sev="baja" data-status="atendida" data-type="equipo">
+          <div class="alert-top">
+            <div>
+              <p class="alert-title">Impresora de etiquetas sin papel</p>
+              <div class="alert-meta"><span>Validación de conexión</span><span>Kiosco</span><span class="mono">06:31</span></div>
+            </div>
+            <span class="badge badge-ok alert-state">Atendida</span>
+          </div>
+          <p class="alert-resolution">Atendida · 06:40 · Carlos Ríos · Se cambió el rollo.</p>
+        </li>
+      </ul>
+      <p class="empty" id="filter-empty" hidden>No hay novedades con esos filtros.</p>
+    </section>
+  </main>
+</div>
+
+<!-- Resolver alerta -->
+<dialog class="modal" id="modal-resolve" aria-labelledby="resolve-title">
+  <div class="modal-head">
+    <h2 id="resolve-title">Marcar como atendida</h2>
+    <button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="modal-body">
+    <p class="small muted">Alerta: <strong id="resolve-alert" style="color:var(--text)"></strong></p>
+    <div class="field">
+      <label for="resolve-comment">Comentario (obligatorio)</label>
+      <textarea class="textarea" id="resolve-comment" placeholder="Qué viste y qué hiciste. Ej.: era personal de aseo, verificado por cámara."></textarea>
+      <span id="resolve-error" class="xsmall" style="color:var(--danger)" hidden>Escribe un comentario antes de guardar.</span>
+    </div>
+    <p class="xsmall faint">Queda en el Historial y sirve para el entrenamiento controlado de Argos.</p>
+  </div>
+  <div class="modal-foot">
+    <button class="btn" type="button" data-close>Cancelar</button>
+    <button class="btn btn-primary" type="button" id="resolve-save">Guardar</button>
+  </div>
+</dialog>
+
+<!-- Cámara del evento + imagen -->
+<dialog class="modal wide" id="modal-cam" aria-labelledby="evcam-title">
+  <div class="modal-head">
+    <h2 id="evcam-title">Cámara del evento</h2>
+    <button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="modal-body">
+    <div class="call-grid">
+      <div id="evcam-live"></div>
+      <div class="stack">
+        <div class="video">
+          <div class="video-feed" style="filter:grayscale(.6) brightness(1.1)"></div>
+          <span class="video-tag">IMAGEN</span>
+          <div class="video-label"><span id="evcam-snap-label">Captura del evento</span></div>
+        </div>
+        <a class="btn btn-sm" id="evcam-link" href="camaras.html">Abrir en Cámaras</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/vigilante.js"></script>
+</body>
+</html>

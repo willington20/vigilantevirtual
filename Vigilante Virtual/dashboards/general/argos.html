@@ -1,0 +1,130 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Argos · Torre de Control</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Torre de Control · PGD</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Monitoreo</a>
+      <a href="sitio.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sitios</a>
+      <a href="incidentes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Incidentes<span class="count" data-count="escaladas">4</span></a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="clientes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Clientes</a>
+      <a href="usuarios.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Usuarios</a>
+      <a href="argos.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Argos</a>
+      <a href="cumplimiento.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Cumplimiento</a>
+      <a href="despliegues.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Despliegues</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Vista general<br>5 clientes · 6 sitios</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Torre de Control</strong><span>Todos los clientes y sitios</span></div>
+    <span class="badge badge-warn hide-sm"><span class="dot dot-live"></span> 1 sitio en contingencia</span>
+    <div class="topbar-spacer"></div>
+    <div id="clock" class="topbar-clock mono">--:--:--</div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">MH</span>
+      <div class="user-name"><div class="small">M. Herrera</div><div class="xsmall muted">Supervisión PGD</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Argos</h1>
+        <p>Agente de IA que clasifica eventos y separa alarmas reales de falsas. Recomienda y alerta; en lo crítico decide una persona.</p>
+      </div>
+    </div>
+
+    <section class="levels" aria-label="Niveles de madurez" style="margin-bottom:var(--sp-4)">
+      <div class="level is-current"><div class="level-num">Nivel 1 · en producción</div><h3>Reglas y alertas</h3><p>Recibe eventos, aplica reglas (horarios, zonas, listas), clasifica, alerta y escala a una persona.</p></div>
+      <div class="level"><div class="level-num">Nivel 2 · cuando haya datos reales</div><h3>Patrones</h3><p>Compara con el historial y detecta comportamiento anormal.</p></div>
+      <div class="level"><div class="level-num">Nivel 3 · con métricas aprobadas</div><h3>Aprendizaje por entorno</h3><p>Se adapta a cada tipo de sitio, siempre con una persona en el circuito.</p></div>
+    </section>
+
+    <section class="kpis">
+      <div class="card kpi"><div class="kpi-label">Eventos (7 días)</div><div class="kpi-value">287</div><div class="kpi-note">6 sitios</div></div>
+      <div class="card kpi is-warn"><div class="kpi-label">Falsas alarmas</div><div class="kpi-value">38 %</div><div class="kpi-note">Bajó del 52 % el mes pasado</div></div>
+      <div class="card kpi"><div class="kpi-label">Falsos negativos detectados</div><div class="kpi-value">0</div><div class="kpi-note">El peor error: se revisa cada semana</div></div>
+      <div class="card kpi"><div class="kpi-label">Tiempo de atención</div><div class="kpi-value">1:05</div><div class="kpi-note">Promedio · 11 escalados</div></div>
+    </section>
+
+    <div class="grid-2">
+      <section class="card">
+        <div class="card-head"><h2>Marcas de los vigilantes por revisar</h2><span class="badge badge-accent">Entrenamiento controlado</span></div>
+        <div class="card-body flush table-wrap">
+          <table class="table">
+            <thead><tr><th>Evento</th><th>Sitio</th><th>Marca</th><th>Comentario</th><th></th></tr></thead>
+            <tbody>
+            <tr><td>Movimiento en bodega fuera de horario</td><td>Bodega Paramericana</td><td><span class="badge badge-offline">Falsa alarma</span></td><td class="muted small">Personal de aseo con turno autorizado</td>
+              <td><div class="row"><button class="btn btn-sm" type="button" onclick="UI.toast('Aprobado para el próximo entrenamiento.','ok');this.closest('tr').remove()">Usar</button>
+              <button class="btn btn-sm btn-ghost" type="button" onclick="UI.toast('Descartado.');this.closest('tr').remove()">Descartar</button></div></td></tr>
+            <tr><td>Persona en zona común fuera de horario</td><td>Conjunto Los Robles</td><td><span class="badge badge-offline">Falsa alarma</span></td><td class="muted small">Residente con permiso de administración</td>
+              <td><div class="row"><button class="btn btn-sm" type="button" onclick="UI.toast('Aprobado para el próximo entrenamiento.','ok');this.closest('tr').remove()">Usar</button>
+              <button class="btn btn-sm btn-ghost" type="button" onclick="UI.toast('Descartado.');this.closest('tr').remove()">Descartar</button></div></td></tr>
+            <tr><td>Merodeo en perímetro</td><td>Logística del Sur · Bodega 2</td><td><span class="badge badge-ok">Atendida</span></td><td class="muted small">Persona ajena; se retiró al ver el aviso</td>
+              <td><div class="row"><button class="btn btn-sm" type="button" onclick="UI.toast('Aprobado para el próximo entrenamiento.','ok');this.closest('tr').remove()">Usar</button>
+              <button class="btn btn-sm btn-ghost" type="button" onclick="UI.toast('Descartado.');this.closest('tr').remove()">Descartar</button></div></td></tr>
+            <tr><td>Vehículo detenido en acceso</td><td>Universidad Andina · Sede Centro</td><td><span class="badge badge-offline">Falsa alarma</span></td><td class="muted small">Bus institucional esperando</td>
+              <td><div class="row"><button class="btn btn-sm" type="button" onclick="UI.toast('Aprobado para el próximo entrenamiento.','ok');this.closest('tr').remove()">Usar</button>
+              <button class="btn btn-sm btn-ghost" type="button" onclick="UI.toast('Descartado.');this.closest('tr').remove()">Descartar</button></div></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Reglas fijas</h2></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Nunca abre a distancia en un caso dudoso</strong><span>Siempre con confirmación de portería</span></div><span class="locked xsmall faint"><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span></li>
+          <li class="setting"><div class="setting-text"><strong>Apertura automática solo si está autorizado y en horario</strong><span>Rostro, tarjeta o QR válidos</span></div><span class="locked xsmall faint"><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span></li>
+          <li class="setting"><div class="setting-text"><strong>No llama a autoridades por sí solo</strong><span>Lo decide una persona</span></div><span class="locked xsmall faint"><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span></li>
+          <li class="setting"><div class="setting-text"><strong>Cada decisión queda registrada con su motivo</strong></div><span class="locked xsmall faint"><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg></span></li>
+          <li class="setting"><div class="setting-text"><strong>Escala a la Torre</strong><span>Si nadie atiende en el puesto</span></div><span class="small">2 min (por defecto)</span></li>
+        </ul>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:var(--sp-4)">
+      <div class="card-head"><h2>Clones por sitio</h2><span class="xsmall muted">Lo que Argos sabe de cada lugar</span></div>
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Sitio</th><th>Perfil</th><th>Zonas conocidas</th><th>Versión de reglas</th></tr></thead>
+          <tbody>
+            <tr><td><strong>Bodega Paramericana</strong></td><td>Bodega v3</td><td class='small'>Portería, perímetro, bodega, muelle</td><td class='mono'>r14</td></tr>
+            <tr><td><strong>Universidad Andina · Sede Norte</strong></td><td>Universidad v2</td><td class='small'>Accesos, biblioteca, parqueadero</td><td class='mono'>r14</td></tr>
+            <tr><td><strong>Universidad Andina · Sede Centro</strong></td><td>Universidad v2</td><td class='small'>Accesos, plazoleta, auditorio</td><td class='mono'>r14</td></tr>
+            <tr><td><strong>Conjunto Los Robles</strong></td><td>Residencia v2</td><td class='small'>Portería, torres, zonas comunes</td><td class='mono'>r13</td></tr>
+            <tr><td><strong>Logística del Sur · Bodega 2</strong></td><td>Bodega v3</td><td class='small'>Entrada, muelle, patio</td><td class='mono'>r14</td></tr>
+            <tr><td><strong>Torres del Parque</strong></td><td>Residencia v2</td><td class='small'>Portería, lobby, parqueadero</td><td class='mono'>r14 · sombra</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+    <p class="xsmall faint" style="margin-top:var(--sp-3)">Qué es exactamente un «clon» (copia de configuración por sitio o modelo por cliente) sigue pendiente de definir con la ingeniera.</p>
+
+  </main>
+</div>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/general.js"></script>
+</body>
+</html>

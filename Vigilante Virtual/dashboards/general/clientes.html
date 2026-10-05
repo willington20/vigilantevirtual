@@ -1,0 +1,137 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Clientes · Torre de Control</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Torre de Control · PGD</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Monitoreo</a>
+      <a href="sitio.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sitios</a>
+      <a href="incidentes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Incidentes<span class="count" data-count="escaladas">4</span></a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="clientes.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Clientes</a>
+      <a href="usuarios.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Usuarios</a>
+      <a href="argos.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Argos</a>
+      <a href="cumplimiento.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Cumplimiento</a>
+      <a href="despliegues.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Despliegues</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Vista general<br>5 clientes · 6 sitios</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Torre de Control</strong><span>Todos los clientes y sitios</span></div>
+    <span class="badge badge-warn hide-sm"><span class="dot dot-live"></span> 1 sitio en contingencia</span>
+    <div class="topbar-spacer"></div>
+    <div id="clock" class="topbar-clock mono">--:--:--</div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">MH</span>
+      <div class="user-name"><div class="small">M. Herrera</div><div class="xsmall muted">Supervisión PGD</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Clientes y sitios</h1>
+        <p>Un solo sistema con los datos de cada cliente separados. Cada sitio nuevo parte de un «clon» de configuración.</p>
+      </div>
+      <button class="btn btn-primary" type="button" data-open-modal="modal-sitio">Nuevo sitio</button>
+    </div>
+
+    <section class="kpis">
+      <div class="card kpi"><div class="kpi-label">Clientes</div><div class="kpi-value">5</div><div class="kpi-note">2 bodegas · 1 universidad · 2 residencias</div></div>
+      <div class="card kpi"><div class="kpi-label">Sitios</div><div class="kpi-value">6</div><div class="kpi-note">1 en piloto</div></div>
+      <div class="card kpi"><div class="kpi-label">Con vigilante humano</div><div class="kpi-value">3</div><div class="kpi-note">Persona detrás del tótem</div></div>
+      <div class="card kpi"><div class="kpi-label">Con IA + soporte PGD</div><div class="kpi-value">3</div><div class="kpi-note">IA detrás del tótem</div></div>
+    </section>
+
+    <div class="filters">
+      <select class="select" id="filter-type" aria-label="Tipo de sitio"><option value="">Todos los tipos</option><option>Bodega</option><option>Universidad</option><option>Residencia</option></select>
+      <input class="input" type="search" id="filter-search" placeholder="Buscar sitio o cliente…" aria-label="Buscar sitios" style="flex:1;min-width:180px">
+    </div>
+
+    <section class="card">
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Sitio / cliente</th><th>Tipo</th><th>Modalidad</th><th>Estado</th><th>Configuración</th><th>Desde</th><th></th></tr></thead>
+          <tbody id="sites-body" data-filterable>
+            <tr data-status="activo" data-type="Bodega">
+              <td><strong>Bodega Paramericana</strong><div class="xsmall muted">Paramericana S.A.S.</div></td><td>Bodega</td><td>Vigilante humano</td>
+              <td><span class="badge badge-ok">En línea</span></td><td class="small muted">Perfil «Bodega» v3</td><td class="mono">2026-09</td>
+              <td><a class="btn btn-sm" href="sitio.html?id=paramericana">Abrir</a></td>
+            </tr>
+            <tr data-status="activo" data-type="Universidad">
+              <td><strong>Universidad Andina · Sede Norte</strong><div class="xsmall muted">Universidad Andina</div></td><td>Universidad</td><td>IA + soporte PGD</td>
+              <td><span class="badge badge-danger">Contingencia</span></td><td class="small muted">Perfil «Universidad» v3</td><td class="mono">2026-08</td>
+              <td><a class="btn btn-sm" href="sitio.html?id=andina-norte">Abrir</a></td>
+            </tr>
+            <tr data-status="activo" data-type="Universidad">
+              <td><strong>Universidad Andina · Sede Centro</strong><div class="xsmall muted">Universidad Andina</div></td><td>Universidad</td><td>IA + soporte PGD</td>
+              <td><span class="badge badge-ok">En línea</span></td><td class="small muted">Perfil «Universidad» v3</td><td class="mono">2026-08</td>
+              <td><a class="btn btn-sm" href="sitio.html?id=andina-centro">Abrir</a></td>
+            </tr>
+            <tr data-status="activo" data-type="Residencia">
+              <td><strong>Conjunto Los Robles</strong><div class="xsmall muted">Copropiedad Los Robles</div></td><td>Residencia</td><td>Vigilante humano</td>
+              <td><span class="badge badge-ok">En línea</span></td><td class="small muted">Perfil «Residencia» v3</td><td class="mono">2026-07</td>
+              <td><a class="btn btn-sm" href="sitio.html?id=robles">Abrir</a></td>
+            </tr>
+            <tr data-status="activo" data-type="Bodega">
+              <td><strong>Logística del Sur · Bodega 2</strong><div class="xsmall muted">Logística del Sur</div></td><td>Bodega</td><td>IA + soporte PGD</td>
+              <td><span class="badge badge-warn">Degradado</span></td><td class="small muted">Perfil «Bodega» v3</td><td class="mono">2026-09</td>
+              <td><a class="btn btn-sm" href="sitio.html?id=logistica-sur">Abrir</a></td>
+            </tr>
+            <tr data-status="activo" data-type="Residencia">
+              <td><strong>Torres del Parque</strong><div class="xsmall muted">Torres del Parque P.H.</div></td><td>Residencia</td><td>Vigilante humano</td>
+              <td><span class="badge badge-info">Piloto</span></td><td class="small muted">Perfil «Residencia» v3</td><td class="mono">2026-10</td>
+              <td><a class="btn btn-sm" href="sitio.html?id=torres-parque">Abrir</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="empty" id="filter-empty" hidden>No hay sitios con esos filtros.</p>
+    </section>
+    <p class="xsmall faint" style="margin-top:var(--sp-3)">Modelo de cobro por sede, cámara o acceso: pendiente de definir.</p>
+
+  </main>
+</div>
+
+<dialog class="modal wide" id="modal-sitio" aria-labelledby="sitio-title">
+  <form data-add-to="sites-body" data-template="sitio" data-success="Sitio creado en estado «Instalación».">
+    <div class="modal-head"><h2 id="sitio-title">Nuevo sitio</h2><button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label for="s-nombre">Nombre del sitio</label><input class="input" id="s-nombre" name="nombre" required></div>
+        <div class="field"><label for="s-cliente">Cliente</label><input class="input" id="s-cliente" name="cliente" required list="clientes-list"><datalist id="clientes-list"><option>Paramericana S.A.S.</option><option>Universidad Andina</option><option>Copropiedad Los Robles</option><option>Logística del Sur</option><option>Torres del Parque P.H.</option></datalist></div>
+        <div class="field"><label for="s-tipo">Tipo de sitio</label><select class="select" id="s-tipo" name="tipo"><option>Bodega</option><option>Universidad</option><option>Residencia</option></select></div>
+        <div class="field"><label for="s-modo">Modalidad</label><select class="select" id="s-modo" name="modalidad"><option>Vigilante humano</option><option>IA + soporte PGD</option></select></div>
+        <div class="field full"><label for="s-clon">Partir de la configuración de</label>
+          <select class="select" id="s-clon" name="clon"><option value="">Ninguno (vacía)</option><option>Bodega Paramericana</option><option>Universidad Andina · Sede Norte</option><option>Universidad Andina · Sede Centro</option><option>Conjunto Los Robles</option><option>Logística del Sur · Bodega 2</option><option>Torres del Parque</option></select>
+          <span class="hint">Copia destinos tipo, horarios, acciones de Argos y retención. No copia personas ni datos personales.</span></div>
+      </div>
+      <div class="notice small"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><div><strong>Pasos para salir a producción:</strong> inventario del hardware real → piloto → modo sombra → anillos (equipo interno, grupo piloto, sede completa).</div></div>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit">Crear sitio</button></div>
+  </form>
+</dialog>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/general.js"></script>
+</body>
+</html>

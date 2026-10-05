@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Reportes · Torre de Control</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Torre de Control · PGD</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Monitoreo</a>
+      <a href="sitio.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sitios</a>
+      <a href="incidentes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Incidentes<span class="count" data-count="escaladas">4</span></a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="clientes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Clientes</a>
+      <a href="usuarios.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Usuarios</a>
+      <a href="argos.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Argos</a>
+      <a href="cumplimiento.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Cumplimiento</a>
+      <a href="despliegues.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Despliegues</a>
+      <a href="reportes.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Vista general<br>5 clientes · 6 sitios</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Torre de Control</strong><span>Todos los clientes y sitios</span></div>
+    <span class="badge badge-warn hide-sm"><span class="dot dot-live"></span> 1 sitio en contingencia</span>
+    <div class="topbar-spacer"></div>
+    <div id="clock" class="topbar-clock mono">--:--:--</div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">MH</span>
+      <div class="user-name"><div class="small">M. Herrera</div><div class="xsmall muted">Supervisión PGD</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Reportes</h1>
+        <p>Comparativo entre sitios y auditoría global.</p>
+      </div>
+      <div class="row">
+        <div class="segmented" role="group" aria-label="Periodo">
+          <button type="button" aria-pressed="false">Hoy</button>
+          <button type="button" aria-pressed="true">7 días</button>
+          <button type="button" aria-pressed="false">30 días</button>
+        </div>
+        <button class="btn" type="button" title="Mockup: exportar">Exportar</button>
+      </div>
+    </div>
+
+    <div class="grid-2 grid-2-even">
+      <section class="card">
+        <div class="card-head"><h2>Ingresos por sitio</h2><span class="xsmall muted">7 días</span></div>
+        <div class="card-body">
+          <ul class="hbars">
+            <li><div class="hbar-label"><span>Universidad Andina · Sede Norte</span><span class="mono">5.410</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:100%"></div></div></li>
+            <li><div class="hbar-label"><span>Universidad Andina · Sede Centro</span><span class="mono">4.380</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:81%"></div></div></li>
+            <li><div class="hbar-label"><span>Conjunto Los Robles</span><span class="mono">905</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:17%"></div></div></li>
+            <li><div class="hbar-label"><span>Torres del Parque</span><span class="mono">488</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:9%"></div></div></li>
+            <li><div class="hbar-label"><span>Logística del Sur · Bodega 2</span><span class="mono">401</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:7%"></div></div></li>
+            <li><div class="hbar-label"><span>Bodega Paramericana</span><span class="mono">312</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:6%"></div></div></li>
+          </ul>
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-head"><h2>Falsas alarmas por sitio</h2><span class="xsmall muted">% de las alertas de Argos</span></div>
+        <div class="card-body">
+          <ul class="hbars">
+            <li><div class="hbar-label"><span>Conjunto Los Robles</span><span class="mono">52 %</span></div><div class="hbar-track"><div class="hbar-fill warn" style="--w:52%"></div></div></li>
+            <li><div class="hbar-label"><span>Bodega Paramericana</span><span class="mono">39 %</span></div><div class="hbar-track"><div class="hbar-fill warn" style="--w:39%"></div></div></li>
+            <li><div class="hbar-label"><span>Universidad Andina · Sede Centro</span><span class="mono">35 %</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:35%"></div></div></li>
+            <li><div class="hbar-label"><span>Logística del Sur · Bodega 2</span><span class="mono">30 %</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:30%"></div></div></li>
+            <li><div class="hbar-label"><span>Universidad Andina · Sede Norte</span><span class="mono">28 %</span></div><div class="hbar-track"><div class="hbar-fill " style="--w:28%"></div></div></li>
+          </ul>
+          <p class="xsmall faint" style="margin-top:var(--sp-3)">Torres del Parque no aparece: está en modo sombra.</p>
+        </div>
+      </section>
+    </div>
+
+    <section class="card" style="margin-top:var(--sp-4)">
+      <div class="card-head"><h2>Auditoría global</h2><span class="xsmall muted">Registro inmutable de accesos y acciones</span></div>
+      <div class="card-body">
+        <div class="filters" style="margin-bottom:0">
+          <select class="select" id="filter-type" aria-label="Sitio"><option value="">Todos los sitios</option><option>Bodega Paramericana</option><option>Universidad Andina · Sede Norte</option><option>Universidad Andina · Sede Centro</option><option>Conjunto Los Robles</option><option>Logística del Sur · Bodega 2</option><option>Torres del Parque</option></select>
+          <input class="input" type="search" id="filter-search" placeholder="Buscar usuario o acción…" aria-label="Buscar en auditoría" style="flex:1;min-width:180px">
+        </div>
+      </div>
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Fecha</th><th>Quién</th><th>Sitio</th><th>Acción</th><th>Detalle</th></tr></thead>
+          <tbody data-filterable>
+            <tr data-status="todas" data-type="Conjunto Los Robles"><td class="mono">05/10 10:18</td><td>Argos</td><td>Conjunto Los Robles</td><td>Incidente escalado</td><td class="muted">Puerta forzada · Torre 3</td></tr>
+            <tr data-status="todas" data-type="Bodega Paramericana"><td class="mono">05/10 10:18</td><td>Argos</td><td>Bodega Paramericana</td><td>Incidente escalado</td><td class="muted">Persona merodeando el perímetro</td></tr>
+            <tr data-status="todas" data-type="Bodega Paramericana"><td class="mono">05/10 10:11</td><td>Argos</td><td>Bodega Paramericana</td><td>Apertura automática</td><td class="muted">Diana Castro · rostro en horario</td></tr>
+            <tr data-status="todas" data-type="Bodega Paramericana"><td class="mono">05/10 09:58</td><td>Carlos Ríos</td><td>Bodega Paramericana</td><td>Apertura a distancia</td><td class="muted">Videollamada con Camila Ruiz</td></tr>
+            <tr data-status="todas" data-type="Universidad Andina · Sede Norte"><td class="mono">05/10 09:57</td><td>M. Herrera</td><td>Universidad Andina · Sede Norte</td><td>Incidente tomado</td><td class="muted">Sitio sin internet</td></tr>
+            <tr data-status="todas" data-type="Conjunto Los Robles"><td class="mono">05/10 09:36</td><td>M. Herrera</td><td>Conjunto Los Robles</td><td>Incidente cerrado</td><td class="muted">Falsa alarma · zona común</td></tr>
+            <tr data-status="todas" data-type="—"><td class="mono">05/10 08:02</td><td>M. Herrera</td><td>—</td><td>Despliegue promovido</td><td class="muted">Reglas de Argos r14 → Sede completa</td></tr>
+            <tr data-status="todas" data-type="Bodega Paramericana"><td class="mono">04/10 16:20</td><td>Andrea Vélez</td><td>Bodega Paramericana</td><td>Cambio de configuración</td><td class="muted">Retención de fotos: 30 → 15 días</td></tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="empty" id="filter-empty" hidden>Sin registros con esos filtros.</p>
+    </section>
+
+  </main>
+</div>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/general.js"></script>
+</body>
+</html>

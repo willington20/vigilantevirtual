@@ -1,0 +1,115 @@
+/* ==========================================================
+   Vigilante Virtual · Dashboard del administrador del cliente
+   Color de acento propio (violeta) para distinguir el entorno.
+   ========================================================== */
+
+:root {
+  --accent:       #8b5cf6;
+  --accent-hover: #7c4ee6;
+  --accent-soft:  rgba(139, 92, 246, .16);
+}
+:root[data-theme="light"] {
+  --accent:       #7c3aed;
+  --accent-hover: #6d2fd6;
+  --accent-soft:  rgba(124, 58, 237, .10);
+}
+
+/* ---------- Grillas ---------- */
+.grid-2 {
+  display: grid;
+  grid-template-columns: minmax(0, 1.4fr) minmax(0, 1fr);
+  gap: var(--sp-4);
+  align-items: start;
+}
+.grid-2-even { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+@media (max-width: 1100px) { .grid-2, .grid-2-even { grid-template-columns: 1fr; } }
+
+/* ---------- Gráfico de barras simple (ingresos por hora) ---------- */
+.bars {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 12), minmax(0, 1fr));
+  align-items: end;
+  gap: 6px;
+  height: 180px;
+  padding-top: var(--sp-2);
+}
+.bar {
+  position: relative;
+  height: var(--h);
+  min-height: 2px;
+  border-radius: 4px 4px 0 0;
+  background: var(--accent);
+}
+.bar.alt { background: color-mix(in srgb, var(--accent) 45%, transparent); }
+.bar:hover::after {
+  content: attr(data-v);
+  position: absolute; bottom: calc(100% + 4px); left: 50%; transform: translateX(-50%);
+  padding: 2px 6px; border-radius: 4px;
+  background: var(--surface-3); color: var(--text);
+  font-size: var(--fs-xs); white-space: nowrap;
+}
+.bars-axis {
+  display: grid;
+  grid-template-columns: repeat(var(--n, 12), minmax(0, 1fr));
+  gap: 6px;
+  margin-top: 6px;
+  font-size: 11px; color: var(--text-faint); text-align: center;
+}
+.legend { display: flex; gap: var(--sp-4); font-size: var(--fs-xs); color: var(--text-muted); }
+.legend span { display: inline-flex; align-items: center; gap: 6px; }
+.legend i { width: 10px; height: 10px; border-radius: 2px; background: var(--accent); }
+.legend i.alt { background: color-mix(in srgb, var(--accent) 45%, transparent); }
+
+/* ---------- Barras horizontales (motivos, tipos) ---------- */
+.hbars { list-style: none; margin: 0; padding: 0; display: flex; flex-direction: column; gap: var(--sp-3); }
+.hbar-label { display: flex; justify-content: space-between; font-size: var(--fs-sm); margin-bottom: 4px; }
+.hbar-track { height: 8px; border-radius: 999px; background: var(--surface-3); overflow: hidden; }
+.hbar-fill { height: 100%; width: var(--w); border-radius: 999px; background: var(--accent); }
+
+/* ---------- Celda de persona ---------- */
+.person { display: flex; align-items: center; gap: var(--sp-3); }
+.person .avatar { width: 30px; height: 30px; font-size: var(--fs-xs); }
+.person-name { font-weight: 600; }
+.person-sub { font-size: var(--fs-xs); color: var(--text-muted); }
+
+.methods { display: flex; flex-wrap: wrap; gap: 4px; }
+
+/* Fila desactivada */
+tr.is-off td { opacity: .5; }
+tr.is-off td:last-child { opacity: 1; }
+
+/* ---------- Puertas (configuración) ---------- */
+.door-cfg { padding: var(--sp-4); display: flex; flex-direction: column; gap: var(--sp-3); }
+.door-cfg dl {
+  margin: 0;
+  display: grid; grid-template-columns: auto 1fr; gap: 6px var(--sp-3);
+  font-size: var(--fs-sm);
+}
+.door-cfg dt { color: var(--text-muted); }
+.door-cfg dd { margin: 0; font-weight: 600; }
+
+/* ---------- Tarjeta de sitio ---------- */
+.site-card {
+  display: flex; align-items: center; gap: var(--sp-4);
+  padding: var(--sp-4);
+}
+.site-icon {
+  display: grid; place-items: center;
+  width: 48px; height: 48px; border-radius: var(--radius);
+  background: var(--accent-soft); color: var(--accent);
+}
+
+/* Bloque bloqueado (reglas que no se pueden cambiar) */
+.locked { display: inline-flex; align-items: center; gap: 6px; font-size: var(--fs-xs); color: var(--text-faint); }
+
+/* Botón de guardar fijo al pie de formularios largos */
+.save-bar {
+  position: sticky; bottom: 0;
+  display: flex; justify-content: flex-end; align-items: center; gap: var(--sp-3);
+  padding: var(--sp-3) var(--sp-4);
+  margin-top: var(--sp-4);
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+}
+@media (max-width: 900px) { .save-bar { bottom: 70px; } }

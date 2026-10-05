@@ -1,0 +1,140 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Usuarios · Torre de Control</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Torre de Control · PGD</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Monitoreo</a>
+      <a href="sitio.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sitios</a>
+      <a href="incidentes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Incidentes<span class="count" data-count="escaladas">4</span></a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="clientes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Clientes</a>
+      <a href="usuarios.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Usuarios</a>
+      <a href="argos.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Argos</a>
+      <a href="cumplimiento.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Cumplimiento</a>
+      <a href="despliegues.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Despliegues</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Vista general<br>5 clientes · 6 sitios</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Torre de Control</strong><span>Todos los clientes y sitios</span></div>
+    <span class="badge badge-warn hide-sm"><span class="dot dot-live"></span> 1 sitio en contingencia</span>
+    <div class="topbar-spacer"></div>
+    <div id="clock" class="topbar-clock mono">--:--:--</div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">MH</span>
+      <div class="user-name"><div class="small">M. Herrera</div><div class="xsmall muted">Supervisión PGD</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Usuarios y roles</h1>
+        <p>Todas las cuentas de todos los sitios. Cada rol ve solo lo que le corresponde.</p>
+      </div>
+      <button class="btn btn-primary" type="button" data-open-modal="modal-usuario">Agregar usuario</button>
+    </div>
+
+    <div class="tabs" role="tablist" id="user-tabs" aria-label="Usuarios">
+      <button role="tab" id="t-cuentas" aria-controls="tab-cuentas">Cuentas</button>
+      <button role="tab" id="t-permisos" aria-controls="tab-permisos">Permisos por rol</button>
+    </div>
+
+    <section id="tab-cuentas" role="tabpanel" aria-labelledby="t-cuentas">
+      <div class="filters">
+        <select class="select" id="filter-type" aria-label="Rol"><option value="">Todos los roles</option><option>Supervisor PGD</option><option>Soporte PGD</option><option>Administrador del sitio</option><option>Vigilante</option></select>
+        <input class="input" type="search" id="filter-search" placeholder="Buscar nombre, sitio…" aria-label="Buscar usuarios" style="flex:1;min-width:180px">
+      </div>
+      <section class="card">
+        <div class="card-body flush table-wrap">
+          <table class="table">
+            <thead><tr><th>Usuario</th><th>Rol</th><th>Alcance</th><th>Segundo factor</th><th>Último ingreso</th><th></th></tr></thead>
+            <tbody id="users-body" data-filterable>
+            <tr data-status="activo" data-type="Supervisor PGD"><td><strong>M. Herrera</strong><div class="xsmall muted">supervision@pgd.example</div></td><td>Supervisor PGD</td><td>Todos los sitios</td><td><span class="badge badge-ok">MFA activo</span></td><td class="">Hoy 05:50</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            <tr data-status="activo" data-type="Soporte PGD"><td><strong>Soporte PGD · turno día</strong><div class="xsmall muted">soporte@pgd.example</div></td><td>Soporte PGD</td><td>Sitios con IA</td><td><span class="badge badge-ok">MFA activo</span></td><td class="">Hoy 06:00</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            <tr data-status="activo" data-type="Administrador del sitio"><td><strong>Andrea Vélez</strong><div class="xsmall muted">admin@paramericana.example</div></td><td>Administrador del sitio</td><td>Bodega Paramericana</td><td><span class="badge badge-ok">MFA activo</span></td><td class="">Ayer 16:20</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            <tr data-status="activo" data-type="Administrador del sitio"><td><strong>Rector(a) delegado(a)</strong><div class="xsmall muted">seguridad@andina.example</div></td><td>Administrador del sitio</td><td>Universidad Andina (2 sedes)</td><td><span class="badge badge-ok">MFA activo</span></td><td class="">Hoy 08:10</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            <tr data-status="activo" data-type="Administrador del sitio"><td><strong>Administración Los Robles</strong><div class="xsmall muted">admin@robles.example</div></td><td>Administrador del sitio</td><td>Conjunto Los Robles</td><td><span class="badge badge-warn">MFA sin usar 9 días</span></td><td class="">Hace 9 días</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            <tr data-status="activo" data-type="Vigilante"><td><strong>Carlos Ríos</strong><div class="xsmall muted">c.rios</div></td><td>Vigilante</td><td>Bodega Paramericana</td><td><span class="badge badge-ok">MFA activo</span></td><td class="">Hoy 05:58</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            <tr data-status="activo" data-type="Vigilante"><td><strong>Fabio Suárez</strong><div class="xsmall muted">f.suarez</div></td><td>Vigilante</td><td>Conjunto Los Robles</td><td><span class="badge badge-ok">MFA activo</span></td><td class="">Hoy 05:55</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            <tr data-status="activo" data-type="Vigilante"><td><strong>Diego Mora</strong><div class="xsmall muted">d.mora</div></td><td>Vigilante</td><td>Bodega Paramericana</td><td><span class="badge badge-danger">Sin activar</span></td><td class="muted">Nunca</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-user>Desactivar</button></td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p class="empty" id="filter-empty" hidden>No hay usuarios con esos filtros.</p>
+      </section>
+    </section>
+
+    <section id="tab-permisos" role="tabpanel" aria-labelledby="t-permisos" hidden>
+      <section class="card">
+        <div class="card-body flush table-wrap">
+          <table class="table matrix">
+            <thead><tr><th>Permiso</th><th>Vigilante</th><th>Admin. del sitio</th><th>Supervisor PGD</th><th>Soporte PGD</th></tr></thead>
+            <tbody>
+            <tr><td>Atender la portería y abrir con confirmación</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td><td><span class="part">Solo emergencia</span></td><td><span class="yes">✓</span></td></tr>
+            <tr><td>Ver cámaras en vivo y grabaciones</td><td><span class="part">Su sitio</span></td><td><span class="part">Su sitio</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+            <tr><td>Marcar alertas (atendida / falsa alarma)</td><td><span class="yes">✓</span></td><td><span class="no">—</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+            <tr><td>Configurar su sitio (destinos, horarios, puertas)</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+            <tr><td>Gestionar vigilantes de su sitio</td><td><span class="no">—</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+            <tr><td>Ver varios sitios</td><td><span class="no">—</span></td><td><span class="no">—</span></td><td><span class="yes">✓</span></td><td><span class="part">Asignados</span></td></tr>
+            <tr><td>Recibir incidentes escalados</td><td><span class="no">—</span></td><td><span class="no">—</span></td><td><span class="yes">✓</span></td><td><span class="yes">✓</span></td></tr>
+            <tr><td>Crear clientes y sitios</td><td><span class="no">—</span></td><td><span class="no">—</span></td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+            <tr><td>Configurar Argos global y desplegar versiones</td><td><span class="no">—</span></td><td><span class="no">—</span></td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+            <tr><td>Auditoría</td><td><span class="no">—</span></td><td><span class="part">Su sitio</span></td><td><span class="yes">✓</span></td><td><span class="no">—</span></td></tr>
+            <tr><td>Abrir a distancia sin confirmación de portería</td><td><span class="no">—</span></td><td><span class="no">—</span></td><td><span class="no">—</span></td><td><span class="no">—</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <p class="xsmall faint" style="margin-top:var(--sp-3)">Ningún rol, ni Argos, puede abrir a distancia sin confirmación de portería.</p>
+    </section>
+
+  </main>
+</div>
+
+<dialog class="modal" id="modal-usuario" aria-labelledby="usuario-title">
+  <form data-add-to="users-body" data-template="usuario" data-success="Usuario creado. Debe activar el segundo factor en su primer ingreso.">
+    <div class="modal-head"><h2 id="usuario-title">Agregar usuario</h2><button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label for="u-nombre">Nombre</label><input class="input" id="u-nombre" name="nombre" required></div>
+      <div class="field"><label for="u-correo">Correo o usuario</label><input class="input" id="u-correo" name="correo" required></div>
+      <div class="field"><label for="u-rol">Rol</label><select class="select" id="u-rol" name="rol"><option>Administrador del sitio</option><option>Vigilante</option><option>Soporte PGD</option><option>Supervisor PGD</option></select></div>
+      <div class="field"><label for="u-alcance">Alcance</label><select class="select" id="u-alcance" name="alcance"><option>Todos los sitios</option><option>Bodega Paramericana</option><option>Universidad Andina · Sede Norte</option><option>Universidad Andina · Sede Centro</option><option>Conjunto Los Robles</option><option>Logística del Sur · Bodega 2</option><option>Torres del Parque</option></select></div>
+      <div class="notice small"><svg class="icon icon-sm" viewBox="0 0 24 24"><rect x="4" y="11" width="16" height="10" rx="2"/><path d="M8 11V7a4 4 0 0 1 8 0v4"/></svg><div>La contraseña inicial se entrega por canal seguro y nunca se muestra aquí.</div></div>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit">Crear</button></div>
+  </form>
+</dialog>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/general.js"></script>
+</body>
+</html>

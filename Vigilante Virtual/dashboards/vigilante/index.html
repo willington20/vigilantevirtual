@@ -1,0 +1,382 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Panel · Vigilante</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/vigilante.css">
+</head>
+<body>
+<div class="app">
+
+  <!-- ===== Barra lateral ===== -->
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Puesto del vigilante</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Panel<span class="count" data-count="alerts">3</span></a>
+      <a href="accesos.html"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><circle cx="14.5" cy="12" r="1"/></svg>Accesos</a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="novedades.html"><svg class="icon" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Novedades</a>
+      <a href="historial.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</a>
+    </nav>
+    <div class="sidebar-foot">Turno 06:00 – 14:00<br>Portería principal</div>
+  </aside>
+
+  <!-- ===== Barra superior ===== -->
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Portería principal</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <button id="simulate-alert" class="btn btn-sm btn-ghost hide-sm" type="button" title="Solo mockup: simula un evento de Argos">Simular alerta</button>
+    <div style="text-align:right">
+      <div id="clock" class="topbar-clock mono">--:--:--</div>
+      <div id="clock-date" class="xsmall muted topbar-clock-date"></div>
+    </div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">CR</span>
+      <div class="user-name"><div class="small">Carlos Ríos</div><div class="xsmall muted">Vigilante</div></div>
+    </div>
+  </header>
+
+  <!-- ===== Contenido ===== -->
+  <main class="main">
+    <div class="page-head">
+      <div>
+        <h1>Panel</h1>
+        <p>Solicitudes de ingreso, alertas de Argos y estado de los equipos en tiempo real.</p>
+      </div>
+    </div>
+
+    <!-- Se muestra cuando el sitio pierde internet (modo contingencia) -->
+    <div class="offline-banner" hidden>
+      <svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
+      <div><strong>Sin internet.</strong> El hub valida con la lista local; los ingresos quedan en cola y se sincronizan al volver la conexión.</div>
+    </div>
+
+    <!-- KPIs -->
+    <section class="kpis" aria-label="Resumen">
+      <div class="card kpi is-warn">
+        <div class="kpi-label">Solicitudes pendientes</div>
+        <div class="kpi-value" data-count="requests">3</div>
+        <div class="kpi-note">Kiosco y videoportero</div>
+      </div>
+      <div class="card kpi is-alert" data-kpi="alerts">
+        <div class="kpi-label">Alertas abiertas</div>
+        <div class="kpi-value" data-count="alerts">3</div>
+        <div class="kpi-note">Argos, sensores y sistema</div>
+      </div>
+      <div class="card kpi">
+        <div class="kpi-label">Ingresos hoy</div>
+        <div class="kpi-value">47</div>
+        <div class="kpi-note">31 personal · 16 visitantes</div>
+      </div>
+      <div class="card kpi is-warn">
+        <div class="kpi-label">Equipos en línea</div>
+        <div class="kpi-value">7/8</div>
+        <div class="kpi-note">1 cámara sin señal</div>
+      </div>
+    </section>
+
+    <div class="panel-grid">
+
+      <!-- ===== Solicitudes de ingreso ===== -->
+      <section class="card">
+        <div class="card-head">
+          <h2>Solicitudes de ingreso</h2>
+          <span class="badge badge-warn"><span data-count="requests">3</span> esperando</span>
+        </div>
+        <ul class="requests">
+          <li class="request">
+            <div class="request-photo" aria-hidden="true">LG</div>
+            <div>
+              <div class="request-name">Laura Gómez <span class="badge badge-accent">Visitante</span><span class="badge badge-warn request-status">Esperando</span></div>
+              <div class="request-meta">
+                <span>CC ••••4521</span>
+                <span>→ Oficina de compras</span>
+                <span>Kiosco</span>
+                <span class="mono">10:12</span>
+              </div>            </div>
+            <div class="request-actions">
+              <button class="btn btn-sm" type="button" data-call="Laura Gómez" data-origin="Kiosco Paramericana-01" data-dest="Oficina de compras" data-doc="CC ••••4521">
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Videollamada</button>
+              <button class="btn btn-sm btn-ok" type="button" data-approve="Laura Gómez">Aprobar y abrir</button>
+              <button class="btn btn-sm btn-danger" type="button" data-reject="Laura Gómez">Rechazar</button>
+            </div>
+          </li>
+          <li class="request">
+            <div class="request-photo" aria-hidden="true">JP</div>
+            <div>
+              <div class="request-name">Jorge Pérez <span class="badge badge-info">Proveedor</span><span class="badge badge-warn request-status">Esperando</span></div>
+              <div class="request-meta">
+                <span>CC ••••0873</span>
+                <span>→ Muelle de carga 1</span>
+                <span>Videoportero</span>
+                <span class="mono">10:15</span>
+              </div>            </div>
+            <div class="request-actions">
+              <button class="btn btn-sm" type="button" data-call="Jorge Pérez" data-origin="Videoportero externo" data-dest="Muelle de carga 1" data-doc="CC ••••0873" data-door="Portón vehicular">
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Videollamada</button>
+              <button class="btn btn-sm btn-ok" type="button" data-approve="Jorge Pérez" data-door="Portón vehicular">Aprobar y abrir</button>
+              <button class="btn btn-sm btn-danger" type="button" data-reject="Jorge Pérez">Rechazar</button>
+            </div>
+          </li>
+          <li class="request">
+            <div class="request-photo" aria-hidden="true">AT</div>
+            <div>
+              <div class="request-name">Ana María Torres <span class="badge badge-accent">Visitante</span><span class="badge badge-warn request-status">Esperando</span></div>
+              <div class="request-meta">
+                <span>CC ••••3390</span>
+                <span>→ Recursos humanos</span>
+                <span>Kiosco</span>
+                <span class="mono">10:18</span>
+              </div>            </div>
+            <div class="request-actions">
+              <button class="btn btn-sm" type="button" data-call="Ana María Torres" data-origin="Kiosco Paramericana-01" data-dest="Recursos humanos" data-doc="CC ••••3390">
+                <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Videollamada</button>
+              <button class="btn btn-sm btn-ok" type="button" data-approve="Ana María Torres">Aprobar y abrir</button>
+              <button class="btn btn-sm btn-danger" type="button" data-reject="Ana María Torres">Rechazar</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== Alertas de Argos ===== -->
+      <section class="card">
+        <div class="card-head">
+          <h2><span class="dot dot-live" style="color:var(--danger)"></span> Alertas en vivo</h2>
+          <a class="small" href="novedades.html">Ver todas las novedades</a>
+        </div>
+        <ul class="alerts">
+          <li class="alert" data-sev="alta" data-status="abierta">
+            <div class="alert-top">
+              <div>
+                <p class="alert-title">Persona merodeando el perímetro</p>
+                <div class="alert-meta">
+                  <span>Argos</span><span>Perímetro oriental</span><span class="mono">10:16</span>
+                  <span class="argos-score">Riesgo 0.84</span>
+                </div>
+              </div>
+              <span class="badge badge-danger alert-state">Nueva</span>
+            </div>
+            <p class="alert-escalate" data-seconds="98"><span class="dot dot-live"></span><span class="esc-text">Se escala a la Torre en 1:38</span></p>
+            <div class="alert-actions">
+              <button class="btn btn-sm" type="button" data-view-cam="cam-08" data-title="Perímetro oriental · persona merodeando" data-time="10:16">Ver cámara</button>
+              <button class="btn btn-sm btn-ok" type="button" data-resolve="atendida">Atendida</button>
+              <button class="btn btn-sm btn-ghost" type="button" data-resolve="falsa">Falsa alarma</button>
+            </div>
+          </li>
+          <li class="alert" data-sev="media" data-status="abierta">
+            <div class="alert-top">
+              <div>
+                <p class="alert-title">Puerta del muelle abierta más de 3 min</p>
+                <div class="alert-meta">
+                  <span>Sensor de puerta</span><span>Muelle de carga 1</span><span class="mono">10:09</span>
+                </div>
+              </div>
+              <span class="badge badge-warn alert-state">Abierta</span>
+            </div>
+            <p class="alert-escalate" data-seconds="41"><span class="dot dot-live"></span><span class="esc-text">Se escala a la Torre en 0:41</span></p>
+            <div class="alert-actions">
+              <button class="btn btn-sm" type="button" data-view-cam="cam-05" data-title="Muelle de carga 1 · puerta abierta" data-time="10:09">Ver cámara</button>
+              <button class="btn btn-sm btn-ok" type="button" data-resolve="atendida">Atendida</button>
+              <button class="btn btn-sm btn-ghost" type="button" data-resolve="falsa">Falsa alarma</button>
+            </div>
+          </li>
+          <li class="alert" data-sev="baja" data-status="abierta">
+            <div class="alert-top">
+              <div>
+                <p class="alert-title">Cámara Pasillo B sin señal</p>
+                <div class="alert-meta">
+                  <span>Validación de conexión</span><span>Bodega</span><span class="mono">09:42</span>
+                </div>
+              </div>
+              <span class="badge badge-info alert-state">Equipo</span>
+            </div>
+            <div class="alert-actions">
+              <button class="btn btn-sm btn-ok" type="button" data-resolve="atendida">Atendida</button>
+              <button class="btn btn-sm btn-ghost" type="button" data-resolve="falsa">Falsa alarma</button>
+            </div>
+          </li>
+        </ul>
+      </section>
+
+      <!-- ===== Estado de equipos ===== -->
+      <section class="card">
+        <div class="card-head">
+          <h2>Estado de equipos</h2>
+          <span class="xsmall muted">Revisado por Argos hace 32 s</span>
+        </div>
+        <div class="card-body">
+          <div class="devices">
+            <div class="device" data-state="ok">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M8 20h8M12 16v4"/></svg></span>
+              <div><div class="device-name">Kiosco</div><div class="device-state"><span class="dot"></span>En línea</div></div>
+            </div>
+            <div class="device" data-state="ok">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><circle cx="12" cy="8" r="2.5"/><path d="M10 15h4M10 18h4"/></svg></span>
+              <div><div class="device-name">Videoportero</div><div class="device-state"><span class="dot"></span>En línea</div></div>
+            </div>
+            <div class="device" data-state="warn">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg></span>
+              <div><div class="device-name">Cámaras</div><div class="device-state"><span class="dot"></span>8 de 9 en línea</div></div>
+            </div>
+            <div class="device" data-state="ok">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M6 9V3h12v6M6 18H4a2 2 0 0 1-2-2v-5a2 2 0 0 1 2-2h16a2 2 0 0 1 2 2v5a2 2 0 0 1-2 2h-2"/><rect x="6" y="14" width="12" height="7"/></svg></span>
+              <div><div class="device-name">Impresoras</div><div class="device-state"><span class="dot"></span>80 mm y etiquetas</div></div>
+            </div>
+            <div class="device" data-state="ok">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M3 7V5a2 2 0 0 1 2-2h2M17 3h2a2 2 0 0 1 2 2v2M21 17v2a2 2 0 0 1-2 2h-2M7 21H5a2 2 0 0 1-2-2v-2M7 12h10"/></svg></span>
+              <div><div class="device-name">Lector QR/RFID</div><div class="device-state"><span class="dot"></span>En línea</div></div>
+            </div>
+            <div class="device" data-state="ok">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><rect x="5" y="5" width="14" height="14" rx="2"/><path d="M9 9h6v6H9zM9 2v3M15 2v3M9 19v3M15 19v3M2 9h3M2 15h3M19 9h3M19 15h3"/></svg></span>
+              <div><div class="device-name">Controlador</div><div class="device-state"><span class="dot"></span>En línea</div></div>
+            </div>
+            <div class="device" data-state="ok">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><path d="M13 2 3 14h9l-1 8 10-12h-9z"/></svg></span>
+              <div><div class="device-name">Relé puerta</div><div class="device-state"><span class="dot"></span>Responde</div></div>
+            </div>
+            <div class="device" data-state="ok">
+              <span class="device-icon"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="7" width="20" height="10" rx="2"/><path d="M6 12h.01M10 12h.01"/></svg></span>
+              <div><div class="device-name">Hub local</div><div class="device-state"><span class="dot"></span>Lista sincronizada</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== Últimos accesos ===== -->
+      <section class="card">
+        <div class="card-head">
+          <h2>Últimos accesos</h2>
+          <a class="small" href="historial.html">Ver historial</a>
+        </div>
+        <div class="card-body flush table-wrap">
+          <table class="table">
+            <thead><tr><th>Hora</th><th>Persona</th><th>Medio</th><th>Resultado</th></tr></thead>
+            <tbody>
+              <tr><td class="mono">10:11</td><td>Diana Castro</td><td>Rostro</td><td><span class="badge badge-ok">Permitido</span></td></tr>
+              <tr><td class="mono">10:07</td><td>Desconocido</td><td>QR</td><td><span class="badge badge-danger">Denegado · QR vencido</span></td></tr>
+              <tr><td class="mono">10:02</td><td>Pedro Salas</td><td>Tarjeta RFID</td><td><span class="badge badge-ok">Permitido</span></td></tr>
+              <tr><td class="mono">09:58</td><td>Camila Ruiz</td><td>Videollamada</td><td><span class="badge badge-ok">Aprobado por portería</span></td></tr>
+              <tr><td class="mono">09:51</td><td>Mario León</td><td>Rostro</td><td><span class="badge badge-danger">Denegado · fuera de horario</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+    </div>
+  </main>
+</div>
+
+<!-- =========================================================
+     MODALES
+     ========================================================= -->
+
+<!-- Confirmar apertura de puerta -->
+<dialog class="modal" id="modal-open" aria-labelledby="open-title">
+  <div class="modal-head">
+    <h2 id="open-title">Abrir <span id="open-door-name">puerta</span></h2>
+    <button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="modal-body">
+    <p class="muted small" id="open-reason">Apertura manual</p>
+    <div class="notice notice-warn">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
+      <div>Confirma que ves a la persona en cámara antes de abrir. La orden queda registrada con tu usuario y la hora.</div>
+    </div>
+    <div id="open-status" class="open-status" hidden></div>
+  </div>
+  <div class="modal-foot">
+    <button class="btn" type="button" id="open-cancel" data-close>Cancelar</button>
+    <button class="btn btn-ok" type="button" id="open-confirm">Confirmar apertura</button>
+  </div>
+</dialog>
+
+<!-- Videollamada (kiosco WebRTC / videoportero SIP) -->
+<dialog class="modal wide" id="modal-call" aria-labelledby="call-title">
+  <div class="modal-head">
+    <h2 id="call-title">Videollamada · <span id="call-name">Visitante</span></h2>
+    <span class="badge badge-ok"><span class="dot dot-live"></span> Conectado</span>
+  </div>
+  <div class="modal-body">
+    <div class="call-grid">
+      <div class="video">
+        <div class="video-feed"></div>
+        <span class="video-tag live"><span class="dot dot-live"></span> EN VIVO</span>
+        <div class="call-pip" title="Tu cámara"></div>
+        <div class="video-label"><span id="call-origin">Kiosco</span><span class="mono">00:42</span></div>
+      </div>
+      <div class="call-data stack">
+        <dl>
+          <dt>Documento</dt><dd id="call-doc">—</dd>
+          <dt>Destino</dt><dd id="call-dest">—</dd>
+          <dt>Registro</dt><dd>Foto y cédula escaneadas</dd>
+        </dl>
+        <div class="notice small">
+          <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+          <div>Aceptó la leyenda de la Ley 1581 en el kiosco.</div>
+        </div>
+      </div>
+    </div>
+    <div class="call-controls">
+      <button class="btn" type="button">Silenciar</button>
+      <button class="btn" type="button">Apagar mi cámara</button>
+      <button class="btn btn-ok" type="button" id="call-open" data-open-door="Puerta principal">Abrir puerta</button>
+      <button class="btn btn-danger" type="button" id="call-hangup">Colgar</button>
+    </div>
+  </div>
+</dialog>
+
+<!-- Resolver alerta (con comentario obligatorio) -->
+<dialog class="modal" id="modal-resolve" aria-labelledby="resolve-title">
+  <div class="modal-head">
+    <h2 id="resolve-title">Marcar como atendida</h2>
+    <button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="modal-body">
+    <p class="small muted">Alerta: <strong id="resolve-alert" style="color:var(--text)"></strong></p>
+    <div class="field">
+      <label for="resolve-comment">Comentario (obligatorio)</label>
+      <textarea class="textarea" id="resolve-comment" placeholder="Qué viste y qué hiciste. Ej.: era personal de aseo, verificado por cámara."></textarea>
+      <span id="resolve-error" class="xsmall" style="color:var(--danger)" hidden>Escribe un comentario antes de guardar.</span>
+    </div>
+    <p class="xsmall faint">Queda en el Historial y sirve para el entrenamiento controlado de Argos.</p>
+  </div>
+  <div class="modal-foot">
+    <button class="btn" type="button" data-close>Cancelar</button>
+    <button class="btn btn-primary" type="button" id="resolve-save">Guardar</button>
+  </div>
+</dialog>
+
+<!-- Cámara del evento + imagen -->
+<dialog class="modal wide" id="modal-cam" aria-labelledby="evcam-title">
+  <div class="modal-head">
+    <h2 id="evcam-title">Cámara del evento</h2>
+    <button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="modal-body">
+    <div class="call-grid">
+      <div id="evcam-live"></div>
+      <div class="stack">
+        <div class="video">
+          <div class="video-feed" style="filter:grayscale(.6) brightness(1.1)"></div>
+          <span class="video-tag">IMAGEN</span>
+          <div class="video-label"><span id="evcam-snap-label">Captura del evento</span></div>
+        </div>
+        <a class="btn btn-sm" id="evcam-link" href="camaras.html">Abrir en Cámaras</a>
+      </div>
+    </div>
+  </div>
+</dialog>
+
+<script src="js/vigilante.js"></script>
+</body>
+</html>

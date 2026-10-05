@@ -1,0 +1,160 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Personal · Administración</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Administrador del sitio</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Resumen</a>
+      <a href="personal.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Personal</a>
+      <a href="destinos.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Destinos</a>
+      <a href="horarios.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Horarios</a>
+      <a href="dispositivos.html"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Dispositivos</a>
+      <a href="vigilantes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><circle cx="12" cy="10" r="2.5"/><path d="M8.5 16c.8-1.5 2-2.2 3.5-2.2s2.7.7 3.5 2.2"/></svg>Vigilantes</a>
+      <a href="configuracion.html"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Configuración</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Paramericana S.A.S.<br>Plan Portero Vigilante · 1 sitio</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Paramericana S.A.S.</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">AV</span>
+      <div class="user-name"><div class="small">Andrea Vélez</div><div class="xsmall muted">Administración del sitio</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Personal autorizado</h1>
+        <p>Empleados, contratistas y proveedores frecuentes que pueden entrar al sitio sin pasar por el kiosco.</p>
+      </div>
+      <button class="btn btn-primary" type="button" data-open-modal="modal-persona">Agregar persona</button>
+    </div>
+
+    <div class="notice" style="margin-bottom:var(--sp-4)">
+      <svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg>
+      <div>El rostro se enrola desde la app o el hub; aquí solo ves su estado. <strong>Nadie está obligado a dar su rostro</strong> (Ley 1581): asigna tarjeta, PIN o QR como alternativa.</div>
+    </div>
+
+    <div class="filters">
+      <div class="segmented" role="group" aria-label="Estado">
+        <button type="button" data-filter="todas" aria-pressed="true">Todos</button>
+        <button type="button" data-filter="activo" aria-pressed="false">Activos</button>
+        <button type="button" data-filter="inactivo" aria-pressed="false">Inactivos</button>
+      </div>
+      <select class="select" id="filter-type" aria-label="Tipo de persona">
+        <option value="">Todos los tipos</option>
+        <option>Empleado</option>
+        <option>Contratista</option>
+        <option>Proveedor frecuente</option>
+      </select>
+      <input class="input" type="search" id="filter-search" placeholder="Buscar nombre, área…" aria-label="Buscar personas" style="flex:1;min-width:180px">
+      <span class="small muted"><span id="filter-count">0</span> personas</span>
+    </div>
+
+    <section class="card">
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Persona</th><th>Tipo</th><th>Área / destino</th><th>Medios de acceso</th><th>Horario</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="people-body" data-filterable>
+            <tr data-status="activo" data-type="Empleado">
+              <td><div class="person"><span class="avatar">DC</span><div><div class="person-name">Diana Castro</div><div class="person-sub">Analista contable</div></div></div></td><td>Empleado</td><td>Contabilidad</td>
+              <td><div class="methods"><span class="badge">Rostro</span><span class="badge">Tarjeta RFID</span></div></td><td>Administrativo</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Empleado">
+              <td><div class="person"><span class="avatar">PS</span><div><div class="person-name">Pedro Salas</div><div class="person-sub">Jefe de bodega</div></div></div></td><td>Empleado</td><td>Bodega</td>
+              <td><div class="methods"><span class="badge">Tarjeta RFID</span><span class="badge">PIN</span></div></td><td>Operativo mañana</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Empleado">
+              <td><div class="person"><span class="avatar">ML</span><div><div class="person-name">Mario León</div><div class="person-sub">Auxiliar de bodega</div></div></div></td><td>Empleado</td><td>Bodega</td>
+              <td><div class="methods"><span class="badge">Rostro</span></div></td><td>Operativo tarde</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Empleado">
+              <td><div class="person"><span class="avatar">SM</span><div><div class="person-name">Sofía Méndez</div><div class="person-sub">Recursos humanos</div></div></div></td><td>Empleado</td><td>Recursos humanos</td>
+              <td><div class="methods"><span class="badge">PIN</span><span class="badge">QR</span><span class="badge badge-info" title="Eligió no registrar su rostro (Ley 1581)">Sin rostro por elección</span></div></td><td>Administrativo</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Empleado">
+              <td><div class="person"><span class="avatar">HG</span><div><div class="person-name">Hernán Gil</div><div class="person-sub">Operario</div></div></div></td><td>Empleado</td><td>Bodega</td>
+              <td><div class="methods"><span class="badge">Rostro</span><span class="badge">Tarjeta RFID</span></div></td><td>Operativo noche</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Contratista">
+              <td><div class="person"><span class="avatar">VR</span><div><div class="person-name">Valentina Ríos</div><div class="person-sub">Mantenimiento</div></div></div></td><td>Contratista</td><td>Mantenimiento</td>
+              <td><div class="methods"><span class="badge">Tarjeta RFID</span><span class="badge">Rostro</span><span class="badge badge-warn">Rostro por enrolar</span></div></td><td>Administrativo</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Proveedor frecuente">
+              <td><div class="person"><span class="avatar">TA</span><div><div class="person-name">Transportes Andina</div><div class="person-sub">Proveedor de carga</div></div></div></td><td>Proveedor frecuente</td><td>Muelle de carga 1</td>
+              <td><div class="methods"><span class="badge">QR</span></div></td><td>Proveedores</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="inactivo" data-type="Empleado" class="is-off">
+              <td><div class="person"><span class="avatar">RP</span><div><div class="person-name">Ricardo Peña</div><div class="person-sub">Exempleado</div></div></div></td><td>Empleado</td><td>Compras</td>
+              <td><div class="methods"><span class="badge">Tarjeta RFID</span></div></td><td>Administrativo</td><td><span class="badge badge-offline row-state">Inactivo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Activar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="empty" id="filter-empty" hidden>No hay personas con esos filtros.</p>
+    </section>
+
+  </main>
+</div>
+
+<dialog class="modal wide" id="modal-persona" aria-labelledby="persona-title">
+  <form data-add-to="people-body" data-template="persona" data-success="Persona agregada. Si eligió rostro, quedará por enrolar.">
+    <div class="modal-head"><h2 id="persona-title">Agregar persona</h2><button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="form-grid">
+        <div class="field"><label for="p-nombre">Nombre completo</label><input class="input" id="p-nombre" name="nombre" required></div>
+        <div class="field"><label for="p-doc">Documento</label><input class="input" id="p-doc" name="documento" inputmode="numeric" required><span class="hint">Se guarda cifrado y se muestra enmascarado.</span></div>
+        <div class="field"><label for="p-tipo">Tipo</label><select class="select" id="p-tipo" name="tipo"><option>Empleado</option><option>Contratista</option><option>Proveedor frecuente</option></select></div>
+        <div class="field"><label for="p-cargo">Cargo</label><input class="input" id="p-cargo" name="cargo"></div>
+        <div class="field"><label for="p-destino">Área / destino</label><select class="select" id="p-destino" name="destino"><option>Bodega</option><option>Contabilidad</option><option>Compras</option><option>Recursos humanos</option><option>Gerencia</option><option>Muelle de carga 1</option><option>Mantenimiento</option></select></div>
+        <div class="field"><label for="p-horario">Horario</label><select class="select" id="p-horario" name="horario"><option>Administrativo</option><option>Operativo mañana</option><option>Operativo tarde</option><option>Operativo noche</option><option>Proveedores</option></select></div>
+        <fieldset class="field full" style="border:0;padding:0;margin:0">
+          <legend class="small muted" style="font-weight:600;margin-bottom:6px">Medios de acceso</legend>
+          <div class="row">
+            <label class="row small"><input type="checkbox" name="medio" value="Rostro"> Rostro</label>
+            <label class="row small"><input type="checkbox" name="medio" value="Tarjeta RFID" checked> Tarjeta RFID</label>
+            <label class="row small"><input type="checkbox" name="medio" value="PIN"> PIN</label>
+            <label class="row small"><input type="checkbox" name="medio" value="QR"> QR</label>
+          </div>
+        </fieldset>
+      </div>
+      <div class="notice small"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 8v4M12 16h.01"/></svg><div>Antes de enrolar el rostro, la persona debe aceptar la leyenda de la Ley 1581 y la autorización de datos biométricos.</div></div>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit">Agregar</button></div>
+  </form>
+</dialog>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

@@ -1,0 +1,167 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Accesos · Vigilante</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/vigilante.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Puesto del vigilante</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Panel<span class="count" data-count="alerts">3</span></a>
+      <a href="accesos.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21h16M6 21V4a1 1 0 0 1 1-1h10a1 1 0 0 1 1 1v17"/><circle cx="14.5" cy="12" r="1"/></svg>Accesos</a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="novedades.html"><svg class="icon" viewBox="0 0 24 24"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>Novedades</a>
+      <a href="historial.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>Historial</a>
+    </nav>
+    <div class="sidebar-foot">Turno 06:00 – 14:00<br>Portería principal</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Portería principal</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <div style="text-align:right">
+      <div id="clock" class="topbar-clock mono">--:--:--</div>
+      <div id="clock-date" class="xsmall muted topbar-clock-date"></div>
+    </div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">CR</span>
+      <div class="user-name"><div class="small">Carlos Ríos</div><div class="xsmall muted">Vigilante</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+    <div class="page-head">
+      <div>
+        <h1>Accesos</h1>
+        <p>Abre o bloquea las puertas. Cada orden se confirma con el controlador (máximo 15 s) y no se repite.</p>
+      </div>
+    </div>
+
+    <!-- ===== Puertas ===== -->
+    <section class="doors" aria-label="Puertas">
+      <article class="card door" data-state="cerrada">
+        <div class="door-top">
+          <div>
+            <div class="door-name">Puerta principal</div>
+            <div class="door-info"><span>Peatonal</span><span>Fail-safe · ruta de evacuación</span></div>
+          </div>
+          <span class="badge badge-ok door-state"><span class="dot"></span> Cerrada</span>
+        </div>
+        <div class="door-info"><span>Último acceso <span class="mono">10:11</span> · Diana Castro (rostro)</span></div>
+        <div class="door-actions">
+          <button class="btn btn-ok" type="button" data-open-door="Puerta principal">Abrir</button>
+          <button class="btn" type="button" data-lock-door="Puerta principal" aria-pressed="false">Bloquear</button>
+        </div>
+      </article>
+
+      <article class="card door" data-state="cerrada">
+        <div class="door-top">
+          <div>
+            <div class="door-name">Portón vehicular</div>
+            <div class="door-info"><span>Vehicular</span><span>Fail-safe</span></div>
+          </div>
+          <span class="badge badge-ok door-state"><span class="dot"></span> Cerrada</span>
+        </div>
+        <div class="door-info"><span>Último acceso <span class="mono">09:34</span> · Placa ••• 482 (videollamada)</span></div>
+        <div class="door-actions">
+          <button class="btn btn-ok" type="button" data-open-door="Portón vehicular">Abrir</button>
+          <button class="btn" type="button" data-lock-door="Portón vehicular" aria-pressed="false">Bloquear</button>
+        </div>
+      </article>
+
+      <!-- Ejemplo: relé que no responde → el vigilante ve «NO se abrió» -->
+      <article class="card door" data-state="cerrada">
+        <div class="door-top">
+          <div>
+            <div class="door-name">Cuarto de alto valor</div>
+            <div class="door-info"><span>Interna</span><span>Fail-secure</span></div>
+          </div>
+          <span class="badge badge-warn door-state"><span class="dot"></span> Relé lento</span>
+        </div>
+        <div class="door-info"><span>Último acceso <span class="mono">08:02</span> · Pedro Salas (tarjeta)</span></div>
+        <div class="door-actions">
+          <button class="btn btn-ok" type="button" data-open-door="Cuarto de alto valor" data-fail="true">Abrir</button>
+          <button class="btn" type="button" data-lock-door="Cuarto de alto valor" aria-pressed="false">Bloquear</button>
+        </div>
+      </article>
+
+      <article class="card door" data-state="abierta">
+        <div class="door-top">
+          <div>
+            <div class="door-name">Puerta del muelle 1</div>
+            <div class="door-info"><span>Carga</span><span>Fail-secure</span></div>
+          </div>
+          <span class="badge badge-warn door-state"><span class="dot dot-live"></span> Abierta 3 min</span>
+        </div>
+        <div class="door-info"><span>Supera el tiempo configurado (2 min) · alerta creada</span></div>
+        <div class="door-actions">
+          <a class="btn" href="camaras.html?cam=cam-05">Ver cámara</a>
+          <button class="btn" type="button" data-lock-door="Puerta del muelle 1" aria-pressed="false">Bloquear</button>
+        </div>
+      </article>
+    </section>
+
+    <!-- ===== Accesos de hoy ===== -->
+    <section class="card">
+      <div class="card-head">
+        <h2>Accesos de hoy</h2>
+        <a class="small" href="historial.html">Ver historial completo</a>
+      </div>
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead>
+            <tr><th>Hora</th><th>Persona</th><th>Tipo</th><th>Medio</th><th>Puerta</th><th>Resultado</th><th>Abrió</th></tr>
+          </thead>
+          <tbody>
+            <tr><td class="mono">10:11</td><td>Diana Castro</td><td>Personal</td><td>Rostro</td><td>Principal</td><td><span class="badge badge-ok">Permitido</span></td><td class="muted">Automático · en horario</td></tr>
+            <tr><td class="mono">10:07</td><td>Desconocido</td><td>—</td><td>QR</td><td>Principal</td><td><span class="badge badge-danger">No abrió · QR vencido</span></td><td class="muted">—</td></tr>
+            <tr><td class="mono">10:02</td><td>Pedro Salas</td><td>Personal</td><td>Tarjeta RFID</td><td>Principal</td><td><span class="badge badge-ok">Permitido</span></td><td class="muted">Automático · en horario</td></tr>
+            <tr><td class="mono">09:58</td><td>Camila Ruiz</td><td>Visitante</td><td>Videollamada</td><td>Principal</td><td><span class="badge badge-ok">Permitido</span></td><td>Carlos Ríos</td></tr>
+            <tr><td class="mono">09:51</td><td>Mario León</td><td>Personal</td><td>Rostro</td><td>Principal</td><td><span class="badge badge-danger">No abrió · fuera de horario</span></td><td class="muted">—</td></tr>
+            <tr><td class="mono">09:34</td><td>Transportes Andina</td><td>Proveedor</td><td>Videollamada</td><td>Vehicular</td><td><span class="badge badge-ok">Permitido</span></td><td>Carlos Ríos</td></tr>
+            <tr><td class="mono">09:20</td><td>Desconocido</td><td>—</td><td>Tarjeta RFID</td><td>Principal</td><td><span class="badge badge-danger">No abrió · tarjeta no registrada</span></td><td class="muted">—</td></tr>
+            <tr><td class="mono">08:02</td><td>Pedro Salas</td><td>Personal</td><td>Tarjeta RFID</td><td>Alto valor</td><td><span class="badge badge-ok">Permitido</span></td><td class="muted">Automático · en horario</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+  </main>
+</div>
+
+<!-- Confirmar apertura de puerta -->
+<dialog class="modal" id="modal-open" aria-labelledby="open-title">
+  <div class="modal-head">
+    <h2 id="open-title">Abrir <span id="open-door-name">puerta</span></h2>
+    <button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button>
+  </div>
+  <div class="modal-body">
+    <p class="muted small" id="open-reason">Apertura manual</p>
+    <div class="notice notice-warn">
+      <svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
+      <div>Confirma que ves a la persona en cámara antes de abrir. La orden queda registrada con tu usuario y la hora.</div>
+    </div>
+    <div id="open-status" class="open-status" hidden></div>
+  </div>
+  <div class="modal-foot">
+    <button class="btn" type="button" id="open-cancel" data-close>Cancelar</button>
+    <button class="btn btn-ok" type="button" id="open-confirm">Confirmar apertura</button>
+  </div>
+</dialog>
+
+<script src="js/vigilante.js"></script>
+</body>
+</html>

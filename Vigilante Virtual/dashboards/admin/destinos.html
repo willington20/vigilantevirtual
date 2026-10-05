@@ -1,0 +1,127 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Destinos · Administración</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Administrador del sitio</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Resumen</a>
+      <a href="personal.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Personal</a>
+      <a href="destinos.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Destinos</a>
+      <a href="horarios.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Horarios</a>
+      <a href="dispositivos.html"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Dispositivos</a>
+      <a href="vigilantes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><circle cx="12" cy="10" r="2.5"/><path d="M8.5 16c.8-1.5 2-2.2 3.5-2.2s2.7.7 3.5 2.2"/></svg>Vigilantes</a>
+      <a href="configuracion.html"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Configuración</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Paramericana S.A.S.<br>Plan Portero Vigilante · 1 sitio</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Paramericana S.A.S.</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">AV</span>
+      <div class="user-name"><div class="small">Andrea Vélez</div><div class="xsmall muted">Administración del sitio</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Destinos</h1>
+        <p>El directorio que ve el visitante en el kiosco al elegir a dónde va.</p>
+      </div>
+      <button class="btn btn-primary" type="button" data-open-modal="modal-destino">Agregar destino</button>
+    </div>
+
+    <div class="filters">
+      <div class="segmented" role="group" aria-label="Estado">
+        <button type="button" data-filter="todas" aria-pressed="true">Todos</button>
+        <button type="button" data-filter="activo" aria-pressed="false">Activos</button>
+        <button type="button" data-filter="inactivo" aria-pressed="false">Inactivos</button>
+      </div>
+      <select class="select" id="filter-type" aria-label="Tipo de destino">
+        <option value="">Todos los tipos</option><option>Oficina</option><option>Bodega</option><option>Muelle</option>
+      </select>
+      <input class="input" type="search" id="filter-search" placeholder="Buscar destino o anfitrión…" aria-label="Buscar destinos" style="flex:1;min-width:180px">
+    </div>
+
+    <section class="card">
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Destino</th><th>Tipo</th><th>Ubicación</th><th>Anfitrión</th><th>Aprobación de visitas</th><th>Estado</th><th></th></tr></thead>
+          <tbody id="dest-body" data-filterable>
+            <tr data-status="activo" data-type="Oficina">
+              <td><strong>Oficina de compras</strong></td><td>Oficina</td><td>Piso 2</td><td>Ricardo Gómez</td><td>Anfitrión aprueba</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Oficina">
+              <td><strong>Recursos humanos</strong></td><td>Oficina</td><td>Piso 2</td><td>Sofía Méndez</td><td>Anfitrión aprueba</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Oficina">
+              <td><strong>Contabilidad</strong></td><td>Oficina</td><td>Piso 2</td><td>Diana Castro</td><td>Anfitrión aprueba</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Oficina">
+              <td><strong>Gerencia</strong></td><td>Oficina</td><td>Piso 3</td><td>Asistente de gerencia</td><td>Anfitrión aprueba</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Bodega">
+              <td><strong>Bodega principal</strong></td><td>Bodega</td><td>Nave A</td><td>Pedro Salas</td><td>Solo portería</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo" data-type="Muelle">
+              <td><strong>Muelle de carga 1</strong></td><td>Muelle</td><td>Nave A · costado norte</td><td>Pedro Salas</td><td>Solo portería</td><td><span class="badge badge-ok row-state">Activo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="inactivo" data-type="Muelle" class="is-off">
+              <td><strong>Muelle de carga 2</strong></td><td>Muelle</td><td>Nave B</td><td>—</td><td>Solo portería</td><td><span class="badge badge-offline row-state">Inactivo</span></td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Activar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+      <p class="empty" id="filter-empty" hidden>No hay destinos con esos filtros.</p>
+    </section>
+    <p class="xsmall faint" style="margin-top:var(--sp-3)">Los tipos de destino dependen del tipo de sitio (Configuración): bodegas y oficinas, facultades y edificios, o torres y apartamentos.</p>
+
+  </main>
+</div>
+
+<dialog class="modal" id="modal-destino" aria-labelledby="destino-title">
+  <form data-add-to="dest-body" data-template="destino" data-success="Destino agregado. Ya aparece en el kiosco.">
+    <div class="modal-head"><h2 id="destino-title">Agregar destino</h2><button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label for="d-nombre">Nombre</label><input class="input" id="d-nombre" name="nombre" required placeholder="Ej.: Oficina de calidad"></div>
+      <div class="field"><label for="d-tipo">Tipo</label><select class="select" id="d-tipo" name="tipo"><option>Oficina</option><option>Bodega</option><option>Muelle</option></select></div>
+      <div class="field"><label for="d-ubi">Ubicación</label><input class="input" id="d-ubi" name="ubicacion" placeholder="Ej.: Piso 2"></div>
+      <div class="field"><label for="d-anf">Anfitrión</label><input class="input" id="d-anf" name="anfitrion" placeholder="Quién recibe a los visitantes"></div>
+      <label class="switch"><input type="checkbox" name="aprobacion" checked><span class="switch-track"></span><span class="small">El anfitrión aprueba las visitas (además de portería)</span></label>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit">Agregar</button></div>
+  </form>
+</dialog>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

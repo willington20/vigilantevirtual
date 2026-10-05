@@ -1,0 +1,213 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Dispositivos · Administración</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Administrador del sitio</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Resumen</a>
+      <a href="personal.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Personal</a>
+      <a href="destinos.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Destinos</a>
+      <a href="horarios.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Horarios</a>
+      <a href="dispositivos.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Dispositivos</a>
+      <a href="vigilantes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><circle cx="12" cy="10" r="2.5"/><path d="M8.5 16c.8-1.5 2-2.2 3.5-2.2s2.7.7 3.5 2.2"/></svg>Vigilantes</a>
+      <a href="configuracion.html"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Configuración</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Paramericana S.A.S.<br>Plan Portero Vigilante · 1 sitio</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Paramericana S.A.S.</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">AV</span>
+      <div class="user-name"><div class="small">Andrea Vélez</div><div class="xsmall muted">Administración del sitio</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Dispositivos</h1>
+        <p>Puertas, cámaras, videoporteros y el kiosco de tu sitio. Argos revisa cada minuto que respondan.</p>
+      </div>
+    </div>
+
+    <div class="tabs" role="tablist" id="dev-tabs" aria-label="Tipo de dispositivo">
+      <button role="tab" id="t-puertas" aria-controls="tab-puertas">Puertas</button>
+      <button role="tab" id="t-camaras" aria-controls="tab-camaras">Cámaras</button>
+      <button role="tab" id="t-video" aria-controls="tab-video">Videoporteros</button>
+      <button role="tab" id="t-kiosco" aria-controls="tab-kiosco">Kiosco</button>
+    </div>
+
+    <section id="tab-puertas" role="tabpanel" aria-labelledby="t-puertas">
+      <div class="notice notice-warn" style="margin-bottom:var(--sp-4)">
+        <svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>
+        <div>En rutas de evacuación la cerradura debe ser <strong>fail-safe</strong> (abre si se va la energía) y liberarse con la alarma de incendio. <em>Fail-secure</em> solo en bodegas o cuartos de alto valor que no sean salida. Valídalo con quien firma el diseño contra incendios.</div>
+      </div>
+      <div class="grid-2 grid-2-even">
+        <article class="card door-cfg" data-name="Puerta principal" data-mode="fail-safe" data-evac="true" data-max="1" data-auto="true">
+          <div class="row" style="justify-content:space-between">
+            <div><strong>Puerta principal</strong><div class="xsmall muted">Peatonal · Controlador OSDP · C-01</div></div>
+            <span class="badge badge-ok">Cerrada</span>
+          </div>
+          <dl>
+            <dt>Modo</dt><dd class="v-mode">Fail-safe (abre sin energía)</dd>
+            <dt>Ruta de evacuación</dt><dd class="v-evac">Sí</dd>
+            <dt>Máx. abierta</dt><dd class="v-max">1 min</dd>
+            <dt>Apertura automática</dt><dd class="v-auto">Permitida (autorizado + en horario)</dd>
+          </dl>
+          <button class="btn btn-sm" type="button" data-edit-door>Editar</button>
+        </article>
+        <article class="card door-cfg" data-name="Portón vehicular" data-mode="fail-safe" data-evac="false" data-max="3" data-auto="false">
+          <div class="row" style="justify-content:space-between">
+            <div><strong>Portón vehicular</strong><div class="xsmall muted">Vehicular · Controlador OSDP · C-02</div></div>
+            <span class="badge badge-ok">Cerrada</span>
+          </div>
+          <dl>
+            <dt>Modo</dt><dd class="v-mode">Fail-safe (abre sin energía)</dd>
+            <dt>Ruta de evacuación</dt><dd class="v-evac">No</dd>
+            <dt>Máx. abierta</dt><dd class="v-max">3 min</dd>
+            <dt>Apertura automática</dt><dd class="v-auto">Desactivada</dd>
+          </dl>
+          <button class="btn btn-sm" type="button" data-edit-door>Editar</button>
+        </article>
+        <article class="card door-cfg" data-name="Cuarto de alto valor" data-mode="fail-secure" data-evac="false" data-max="1" data-auto="true">
+          <div class="row" style="justify-content:space-between">
+            <div><strong>Cuarto de alto valor</strong><div class="xsmall muted">Interna · Controlador OSDP · C-03</div></div>
+            <span class="badge badge-warn">Relé lento</span>
+          </div>
+          <dl>
+            <dt>Modo</dt><dd class="v-mode">Fail-secure (queda cerrada)</dd>
+            <dt>Ruta de evacuación</dt><dd class="v-evac">No</dd>
+            <dt>Máx. abierta</dt><dd class="v-max">1 min</dd>
+            <dt>Apertura automática</dt><dd class="v-auto">Permitida (autorizado + en horario)</dd>
+          </dl>
+          <button class="btn btn-sm" type="button" data-edit-door>Editar</button>
+        </article>
+        <article class="card door-cfg" data-name="Puerta del muelle 1" data-mode="fail-secure" data-evac="false" data-max="2" data-auto="false">
+          <div class="row" style="justify-content:space-between">
+            <div><strong>Puerta del muelle 1</strong><div class="xsmall muted">Carga · Controlador OSDP · C-04</div></div>
+            <span class="badge badge-warn">Abierta 3 min</span>
+          </div>
+          <dl>
+            <dt>Modo</dt><dd class="v-mode">Fail-secure (queda cerrada)</dd>
+            <dt>Ruta de evacuación</dt><dd class="v-evac">No</dd>
+            <dt>Máx. abierta</dt><dd class="v-max">2 min</dd>
+            <dt>Apertura automática</dt><dd class="v-auto">Desactivada</dd>
+          </dl>
+          <button class="btn btn-sm" type="button" data-edit-door>Editar</button>
+        </article>
+      </div>
+    </section>
+
+    <section id="tab-camaras" role="tabpanel" aria-labelledby="t-camaras" hidden>
+      <section class="card">
+        <div class="card-head"><h2>Cámaras</h2><span class="badge badge-warn">8 de 9 en línea</span></div>
+        <div class="card-body flush table-wrap">
+          <table class="table">
+            <thead><tr><th>Cámara</th><th>Zona</th><th>Estado</th><th>Grabación</th><th>Visible en el puesto</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Entrada principal</strong><div class="xsmall muted mono">CAM-01</div></td><td>Portería</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Videoportero externo</strong><div class="xsmall muted mono">CAM-02</div></td><td>Portería</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Kiosco Paramericana-01</strong><div class="xsmall muted mono">CAM-03</div></td><td>Portería</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Parqueadero norte</strong><div class="xsmall muted mono">CAM-04</div></td><td>Exterior</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Muelle de carga 1</strong><div class="xsmall muted mono">CAM-05</div></td><td>Bodega</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Pasillo A</strong><div class="xsmall muted mono">CAM-06</div></td><td>Bodega</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Pasillo B</strong><div class="xsmall muted mono">CAM-07</div></td><td>Bodega</td><td><span class="badge badge-danger"><span class="dot"></span> Sin señal desde 09:42</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Perímetro oriental</strong><div class="xsmall muted mono">CAM-08</div></td><td>Exterior</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            <tr><td><strong>Salida peatonal</strong><div class="xsmall muted mono">CAM-09</div></td><td>Portería</td><td><span class="badge badge-ok"><span class="dot"></span> En línea</span></td><td>30 días</td>
+              <td><label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Visible en el puesto del vigilante</span></label></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <p class="xsmall faint" style="margin-top:var(--sp-3)">El video llega del servicio de ingesta; las cámaras no se conectan directo al navegador.</p>
+    </section>
+
+    <section id="tab-video" role="tabpanel" aria-labelledby="t-video" hidden>
+      <section class="card">
+        <div class="card-head"><h2>Videoportero externo</h2><span class="badge badge-info">Piloto</span></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Modelo</strong><span>Se define después del piloto</span></div><span class="badge badge-offline">Por definir</span></li>
+          <li class="setting"><div class="setting-text"><strong>Reconocimiento facial</strong><span>El equipo reconoce, el hub decide</span></div><span class="badge badge-ok">Activo</span></li>
+          <li class="setting"><div class="setting-text"><strong>Llamada al puesto del vigilante</strong><span>SIP → WebRTC</span></div><span class="badge badge-ok">Conectada</span></li>
+          <li class="setting"><div class="setting-text"><strong>Medios alternos</strong><span>Tarjeta, PIN, QR o videollamada</span></div><span class="badge badge-ok">Habilitados</span></li>
+        </ul>
+      </section>
+      <section class="card" style="margin-top:var(--sp-4)">
+        <div class="card-head"><h2>Ciberseguridad del equipo</h2></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Clave de fábrica cambiada</strong></div><span class="badge badge-ok">Sí</span></li>
+          <li class="setting"><div class="setting-text"><strong>HTTPS</strong></div><span class="badge badge-ok">Sí</span></li>
+          <li class="setting"><div class="setting-text"><strong>P2P y nube del fabricante</strong></div><span class="badge badge-ok">Desactivados</span></li>
+          <li class="setting"><div class="setting-text"><strong>VLAN separada</strong></div><span class="badge badge-ok">VLAN 40</span></li>
+          <li class="setting"><div class="setting-text"><strong>Logs por syslog</strong><span>Hacia Centinela</span></div><span class="badge badge-ok">Enviando</span></li>
+          <li class="setting"><div class="setting-text"><strong>Firmware</strong><span>Firmado y actualizable</span></div><span class="badge badge-warn">Revisar versión</span></li>
+        </ul>
+      </section>
+    </section>
+
+    <section id="tab-kiosco" role="tabpanel" aria-labelledby="t-kiosco" hidden>
+      <section class="card">
+        <div class="card-head"><h2>Kiosco Paramericana-01</h2><span class="badge badge-ok"><span class="dot"></span> En línea</span></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Escáner de documentos</strong><span>Lee el PDF417 de la cédula</span></div><span class="badge badge-ok">OK</span></li>
+          <li class="setting"><div class="setting-text"><strong>Cámara web</strong></div><span class="badge badge-ok">OK</span></li>
+          <li class="setting"><div class="setting-text"><strong>Impresora 80 mm</strong><span>Carnet temporal y ticket</span></div><span class="badge badge-ok">OK</span></li>
+          <li class="setting"><div class="setting-text"><strong>Impresora de etiquetas</strong><span>Sticker con QR</span></div><span class="badge badge-ok">OK · papel cambiado 06:40</span></li>
+          <li class="setting"><div class="setting-text"><strong>Lector de código de barras / QR</strong></div><span class="badge badge-ok">OK</span></li>
+          <li class="setting"><div class="setting-text"><strong>Última sincronización</strong><span>Con el hub local</span></div><span class="small mono">hace 32 s</span></li>
+        </ul>
+      </section>
+    </section>
+
+  </main>
+</div>
+
+<dialog class="modal" id="modal-door" aria-labelledby="door-title-h">
+  <form id="door-form">
+    <div class="modal-head"><h2 id="door-title-h">Editar · <span id="door-title">Puerta</span></h2><button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label for="door-mode">Modo ante corte de energía</label>
+        <select class="select" id="door-mode"><option value="fail-safe">Fail-safe (abre sin energía)</option><option value="fail-secure">Fail-secure (queda cerrada)</option></select></div>
+      <label class="switch"><input type="checkbox" id="door-evac"><span class="switch-track"></span><span class="small">Es ruta de evacuación</span></label>
+      <div class="notice notice-danger small" id="door-warning" hidden><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg><div>Una ruta de evacuación no puede ser fail-secure. Cambia el modo a fail-safe para guardar.</div></div>
+      <div class="field"><label for="door-max">Tiempo máximo abierta (minutos)</label><input class="input" type="number" id="door-max" min="1" max="30"><span class="hint">Después de este tiempo se alerta al vigilante.</span></div>
+      <label class="switch"><input type="checkbox" id="door-auto"><span class="switch-track"></span><span class="small">Apertura automática si la persona está autorizada y en su horario</span></label>
+      <p class="xsmall faint">El cambio queda registrado en auditoría con tu usuario.</p>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit" id="door-save">Guardar</button></div>
+  </form>
+</dialog>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

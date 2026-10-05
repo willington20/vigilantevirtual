@@ -1,0 +1,157 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Horarios · Administración</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Administrador del sitio</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="3" width="7" height="9" rx="1"/><rect x="14" y="3" width="7" height="5" rx="1"/><rect x="14" y="12" width="7" height="9" rx="1"/><rect x="3" y="16" width="7" height="5" rx="1"/></svg>Resumen</a>
+      <a href="personal.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Personal</a>
+      <a href="destinos.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Destinos</a>
+      <a href="horarios.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>Horarios</a>
+      <a href="dispositivos.html"><svg class="icon" viewBox="0 0 24 24"><rect x="2" y="3" width="20" height="14" rx="2"/><path d="M8 21h8M12 17v4"/></svg>Dispositivos</a>
+      <a href="vigilantes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><circle cx="12" cy="10" r="2.5"/><path d="M8.5 16c.8-1.5 2-2.2 3.5-2.2s2.7.7 3.5 2.2"/></svg>Vigilantes</a>
+      <a href="configuracion.html"><svg class="icon" viewBox="0 0 24 24"><path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/></svg>Configuración</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Paramericana S.A.S.<br>Plan Portero Vigilante · 1 sitio</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Bodega Paramericana</strong><span>Paramericana S.A.S.</span></div>
+    <span class="badge badge-ok hide-sm"><span class="dot dot-live"></span> Sitio en línea</span>
+    <div class="topbar-spacer"></div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">AV</span>
+      <div class="user-name"><div class="small">Andrea Vélez</div><div class="xsmall muted">Administración del sitio</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Horarios y turnos</h1>
+        <p>Fuera de su horario, la puerta no abre sola: se genera una alerta y decide el vigilante.</p>
+      </div>
+      <button class="btn btn-primary" type="button" data-open-modal="modal-turno">Agregar turno</button>
+    </div>
+
+    <section class="card">
+      <div class="card-head"><h2>Turnos del personal</h2></div>
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Turno</th><th>Aplica a</th><th>Días</th><th>Horario</th><th>Tolerancia</th><th>Personas</th><th></th></tr></thead>
+          <tbody id="shift-body" data-filterable>
+            <tr data-status="activo">
+              <td><strong>Administrativo</strong></td><td>Empleados de oficina</td><td><div class="days"><span class="on">L</span><span class="on">M</span><span class="on">X</span><span class="on">J</span><span class="on">V</span><span class="">S</span><span class="">D</span></div></td>
+              <td class="mono">07:00 – 17:30</td><td>15 min</td><td class="mono">18</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo">
+              <td><strong>Operativo mañana</strong></td><td>Bodega</td><td><div class="days"><span class="on">L</span><span class="on">M</span><span class="on">X</span><span class="on">J</span><span class="on">V</span><span class="on">S</span><span class="">D</span></div></td>
+              <td class="mono">06:00 – 14:00</td><td>10 min</td><td class="mono">9</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo">
+              <td><strong>Operativo tarde</strong></td><td>Bodega</td><td><div class="days"><span class="on">L</span><span class="on">M</span><span class="on">X</span><span class="on">J</span><span class="on">V</span><span class="on">S</span><span class="">D</span></div></td>
+              <td class="mono">14:00 – 22:00</td><td>10 min</td><td class="mono">7</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo">
+              <td><strong>Operativo noche</strong></td><td>Bodega</td><td><div class="days"><span class="on">L</span><span class="on">M</span><span class="on">X</span><span class="on">J</span><span class="on">V</span><span class="">S</span><span class="">D</span></div></td>
+              <td class="mono">22:00 – 06:00</td><td>10 min</td><td class="mono">4</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+            <tr data-status="activo">
+              <td><strong>Proveedores</strong></td><td>Proveedores frecuentes</td><td><div class="days"><span class="on">L</span><span class="on">M</span><span class="on">X</span><span class="on">J</span><span class="on">V</span><span class="on">S</span><span class="">D</span></div></td>
+              <td class="mono">07:00 – 15:00</td><td>0 min</td><td class="mono">3</td>
+              <td><button class="btn btn-sm btn-ghost" type="button" data-toggle-active>Desactivar</button></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="grid-2 grid-2-even" style="margin-top:var(--sp-4)">
+      <section class="card">
+        <div class="card-head"><h2>Horario de visitantes</h2></div>
+        <form data-settings>
+          <ul class="settings">
+            <li class="setting"><div class="setting-text"><strong>Lunes a viernes</strong><span>El kiosco acepta registros en este rango</span></div>
+              <div class="row"><input class="input" type="time" value="07:00" aria-label="Desde, lunes a viernes"><span class="muted">a</span><input class="input" type="time" value="17:00" aria-label="Hasta, lunes a viernes"></div></li>
+            <li class="setting"><div class="setting-text"><strong>Sábados</strong></div>
+              <div class="row"><input class="input" type="time" value="08:00" aria-label="Desde, sábado"><span class="muted">a</span><input class="input" type="time" value="12:00" aria-label="Hasta, sábado"></div></li>
+            <li class="setting"><div class="setting-text"><strong>Domingos y festivos</strong><span>Sin visitas</span></div>
+              <label class="switch"><input type="checkbox"><span class="switch-track"></span><span class="sr-only">Permitir visitas domingos y festivos</span></label></li>
+          </ul>
+          <div class="save-bar" style="margin:0;border:0;border-top:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius)">
+            <span class="xsmall muted" data-dirty-note>Sin cambios</span>
+            <button class="btn btn-primary btn-sm" type="submit" data-save disabled>Guardar</button>
+          </div>
+        </form>
+      </section>
+
+      <section class="card">
+        <div class="card-head"><h2>Política de entrada y salida</h2></div>
+        <form data-settings>
+          <ul class="settings">
+            <li class="setting"><div class="setting-text"><strong>No permitir entrar antes del turno</strong><span>Se respeta la tolerancia de cada turno</span></div>
+              <label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">No permitir entrar antes del turno</span></label></li>
+            <li class="setting"><div class="setting-text"><strong>Alertar salidas anticipadas</strong><span>Crea una novedad para el vigilante</span></div>
+              <label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Alertar salidas anticipadas</span></label></li>
+            <li class="setting"><div class="setting-text"><strong>Alertar permanencia después del turno</strong><span>Después de la tolerancia</span></div>
+              <label class="switch"><input type="checkbox" checked><span class="switch-track"></span><span class="sr-only">Alertar permanencia después del turno</span></label></li>
+          </ul>
+          <div class="save-bar" style="margin:0;border:0;border-top:1px solid var(--border);border-radius:0 0 var(--radius) var(--radius)">
+            <span class="xsmall muted" data-dirty-note>Sin cambios</span>
+            <button class="btn btn-primary btn-sm" type="submit" data-save disabled>Guardar</button>
+          </div>
+        </form>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<dialog class="modal" id="modal-turno" aria-labelledby="turno-title">
+  <form data-add-to="shift-body" data-template="turno" data-success="Turno creado.">
+    <div class="modal-head"><h2 id="turno-title">Agregar turno</h2><button class="btn btn-icon btn-ghost" type="button" data-close aria-label="Cerrar"><svg class="icon" viewBox="0 0 24 24"><path d="M18 6 6 18M6 6l12 12"/></svg></button></div>
+    <div class="modal-body">
+      <div class="field"><label for="t-nombre">Nombre</label><input class="input" id="t-nombre" name="nombre" required placeholder="Ej.: Fin de semana"></div>
+      <div class="field"><label for="t-aplica">Aplica a</label><input class="input" id="t-aplica" name="aplica" placeholder="Ej.: Bodega"></div>
+      <fieldset class="field" style="border:0;padding:0;margin:0">
+        <legend class="small muted" style="font-weight:600;margin-bottom:6px">Días</legend>
+        <div class="row">
+          <label class="row small"><input type="checkbox" name="dia" value="0" checked> Lun</label><label class="row small"><input type="checkbox" name="dia" value="1" checked> Mar</label><label class="row small"><input type="checkbox" name="dia" value="2" checked> Mié</label><label class="row small"><input type="checkbox" name="dia" value="3" checked> Jue</label><label class="row small"><input type="checkbox" name="dia" value="4" checked> Vie</label><label class="row small"><input type="checkbox" name="dia" value="5"> Sáb</label><label class="row small"><input type="checkbox" name="dia" value="6"> Dom</label>
+        </div>
+      </fieldset>
+      <div class="form-grid">
+        <div class="field"><label for="t-desde">Desde</label><input class="input" type="time" id="t-desde" name="desde" value="08:00" required></div>
+        <div class="field"><label for="t-hasta">Hasta</label><input class="input" type="time" id="t-hasta" name="hasta" value="17:00" required></div>
+      </div>
+      <div class="field"><label for="t-tol">Tolerancia (minutos)</label><input class="input" type="number" id="t-tol" name="tolerancia" min="0" max="60" value="10"></div>
+    </div>
+    <div class="modal-foot"><button class="btn" type="button" data-close>Cancelar</button><button class="btn btn-primary" type="submit">Crear</button></div>
+  </form>
+</dialog>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>

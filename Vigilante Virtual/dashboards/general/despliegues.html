@@ -1,0 +1,113 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Despliegues · Torre de Control</title>
+  <link rel="stylesheet" href="../shared/css/tokens.css">
+  <link rel="stylesheet" href="../shared/css/base.css">
+  <link rel="stylesheet" href="../shared/css/layout.css">
+  <link rel="stylesheet" href="../shared/css/components.css">
+  <link rel="stylesheet" href="css/general.css">
+</head>
+<body>
+<div class="app">
+
+  <aside class="sidebar">
+    <div class="brand">
+      <span class="brand-mark"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/></svg></span>
+      <div><div class="brand-name">Vigilante Virtual</div><div class="brand-role">Torre de Control · PGD</div></div>
+    </div>
+    <nav class="nav" aria-label="Principal">
+      <a href="index.html"><svg class="icon" viewBox="0 0 24 24"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>Monitoreo</a>
+      <a href="sitio.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 21s-7-6-7-11a7 7 0 0 1 14 0c0 5-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg>Sitios</a>
+      <a href="incidentes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0zM12 9v4M12 17h.01"/></svg>Incidentes<span class="count" data-count="escaladas">4</span></a>
+      <a href="camaras.html"><svg class="icon" viewBox="0 0 24 24"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></svg>Cámaras</a>
+      <a href="clientes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 21h18M5 21V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2v16M9 7h2M13 7h2M9 11h2M13 11h2M9 15h2M13 15h2"/></svg>Clientes</a>
+      <a href="usuarios.html"><svg class="icon" viewBox="0 0 24 24"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87M16 3.13a4 4 0 0 1 0 7.75"/></svg>Usuarios</a>
+      <a href="argos.html"><svg class="icon" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 2v3M12 19v3M2 12h3M19 12h3M4.9 4.9 7 7M17 17l2.1 2.1M4.9 19.1 7 17M17 7l2.1-2.1"/></svg>Argos</a>
+      <a href="cumplimiento.html"><svg class="icon" viewBox="0 0 24 24"><path d="M12 3l8 3v6c0 5-3.5 8-8 9-4.5-1-8-4-8-9V6z"/><path d="m9 12 2 2 4-4"/></svg>Cumplimiento</a>
+      <a href="despliegues.html" aria-current="page"><svg class="icon" viewBox="0 0 24 24"><path d="M12 15V3M7 8l5-5 5 5M5 21h14"/></svg>Despliegues</a>
+      <a href="reportes.html"><svg class="icon" viewBox="0 0 24 24"><path d="M3 3v18h18"/><path d="M7 15v3M12 10v8M17 6v12"/></svg>Reportes</a>
+    </nav>
+    <div class="sidebar-foot">Vista general<br>5 clientes · 6 sitios</div>
+  </aside>
+
+  <header class="topbar">
+    <div class="topbar-site"><strong>Torre de Control</strong><span>Todos los clientes y sitios</span></div>
+    <span class="badge badge-warn hide-sm"><span class="dot dot-live"></span> 1 sitio en contingencia</span>
+    <div class="topbar-spacer"></div>
+    <div id="clock" class="topbar-clock mono">--:--:--</div>
+    <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+    <div class="topbar-user">
+      <span class="avatar">MH</span>
+      <div class="user-name"><div class="small">M. Herrera</div><div class="xsmall muted">Supervisión PGD</div></div>
+    </div>
+  </header>
+
+  <main class="main">
+
+    <div class="page-head">
+      <div>
+        <h1>Despliegues</h1>
+        <p>La Torre es el filtro más profundo: las actualizaciones llegan aquí y se reparten a los sitios por anillos.</p>
+      </div>
+    </div>
+
+    <section class="card">
+      <div class="card-head"><h2>Actualizaciones en curso</h2><span class="xsmall muted">Equipo interno → grupo piloto → sede completa → todas</span></div>
+      <div class="card-body flush table-wrap">
+        <table class="table">
+          <thead><tr><th>Componente</th><th>Versión</th><th>Avance</th><th></th></tr></thead>
+          <tbody>
+            <tr><td><strong>Dashboard del vigilante</strong></td><td class="mono small">2.0.0 · Subida 2</td><td><div class="rings"><span class="ring done">Equipo interno</span><span class="ring-sep">→</span><span class="ring active">Grupo piloto</span><span class="ring-sep">→</span><span class="ring ">Sede completa</span><span class="ring-sep">→</span><span class="ring ">Todas las sedes</span></div></td>
+              <td><div class="row"><button class="btn btn-sm btn-primary" type="button" data-promote>Promover</button><button class="btn btn-sm btn-ghost" type="button" data-rollback>Revertir</button></div></td></tr>
+            <tr><td><strong>Reglas de Argos</strong></td><td class="mono small">r14</td><td><div class="rings"><span class="ring done">Equipo interno</span><span class="ring-sep">→</span><span class="ring done">Grupo piloto</span><span class="ring-sep">→</span><span class="ring done">Sede completa</span><span class="ring-sep">→</span><span class="ring active">Todas las sedes</span></div></td>
+              <td><div class="row"><button class="btn btn-sm btn-primary" type="button" data-promote>Promover</button><button class="btn btn-sm btn-ghost" type="button" data-rollback>Revertir</button></div></td></tr>
+            <tr><td><strong>Firmware del videoportero</strong></td><td class="mono small">Piloto · 1 unidad</td><td><div class="rings"><span class="ring active">Equipo interno</span><span class="ring-sep">→</span><span class="ring ">Grupo piloto</span><span class="ring-sep">→</span><span class="ring ">Sede completa</span><span class="ring-sep">→</span><span class="ring ">Todas las sedes</span></div></td>
+              <td><div class="row"><button class="btn btn-sm btn-primary" type="button" data-promote>Promover</button><button class="btn btn-sm btn-ghost" type="button" data-rollback>Revertir</button></div></td></tr>
+            <tr><td><strong>Perfil de configuración «Universidad»</strong></td><td class="mono small">v2</td><td><div class="rings"><span class="ring done">Equipo interno</span><span class="ring-sep">→</span><span class="ring done">Grupo piloto</span><span class="ring-sep">→</span><span class="ring done">Sede completa</span><span class="ring-sep">→</span><span class="ring done">Todas las sedes</span></div></td>
+              <td><div class="row"><button class="btn btn-sm" type="button" disabled>Completado</button><button class="btn btn-sm btn-ghost" type="button" data-rollback>Revertir</button></div></td></tr>
+            <tr><td><strong>Servicio de sincronización (sync-service)</strong></td><td class="mono small">0.9.0</td><td><div class="rings"><span class="ring active">Equipo interno</span><span class="ring-sep">→</span><span class="ring ">Grupo piloto</span><span class="ring-sep">→</span><span class="ring ">Sede completa</span><span class="ring-sep">→</span><span class="ring ">Todas las sedes</span></div></td>
+              <td><div class="row"><button class="btn btn-sm btn-primary" type="button" data-promote>Promover</button><button class="btn btn-sm btn-ghost" type="button" data-rollback>Revertir</button></div></td></tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <div class="grid-2" style="margin-top:var(--sp-4)">
+      <section class="card">
+        <div class="card-head"><h2>Versión por sitio</h2></div>
+        <div class="card-body flush table-wrap">
+          <table class="table">
+            <thead><tr><th>Sitio</th><th>Software</th><th>Reglas Argos</th><th>Última sincronización del hub</th></tr></thead>
+            <tbody>
+            <tr><td><strong>Bodega Paramericana</strong></td><td class="mono">2.0.0</td><td class="mono">r14</td><td><span class="badge badge-ok">hace 32 s</span></td></tr>
+            <tr><td><strong>Universidad Andina · Sede Norte</strong></td><td class="mono">1.9.4</td><td class="mono">r14</td><td><span class="badge badge-danger">09:55 (sin internet)</span></td></tr>
+            <tr><td><strong>Universidad Andina · Sede Centro</strong></td><td class="mono">1.9.4</td><td class="mono">r14</td><td><span class="badge badge-ok">hace 20 s</span></td></tr>
+            <tr><td><strong>Conjunto Los Robles</strong></td><td class="mono">1.9.4</td><td class="mono">r13</td><td><span class="badge badge-warn">hace 41 s</span></td></tr>
+            <tr><td><strong>Logística del Sur · Bodega 2</strong></td><td class="mono">1.9.4</td><td class="mono">r14</td><td><span class="badge badge-ok">hace 15 s</span></td></tr>
+            <tr><td><strong>Torres del Parque</strong></td><td class="mono">2.0.0</td><td class="mono">r14</td><td><span class="badge badge-ok">hace 50 s</span></td></tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+      <section class="card">
+        <div class="card-head"><h2>Antes de promover</h2></div>
+        <ul class="settings">
+          <li class="setting"><div class="setting-text"><strong>Pruebas automáticas en staging</strong></div><span class="badge badge-ok">Pasaron</span></li>
+          <li class="setting"><div class="setting-text"><strong>Revisión de código por otra persona</strong></div><span class="badge badge-ok">Aprobada</span></li>
+          <li class="setting"><div class="setting-text"><strong>Recorrido con hardware real</strong><span>Registro, llamada, carnet, puerta y salida</span></div><span class="badge badge-warn">Pendiente</span></li>
+          <li class="setting"><div class="setting-text"><strong>Reversa probada</strong><span>Volver a la versión anterior en minutos</span></div><span class="badge badge-ok">Sí</span></li>
+          <li class="setting"><div class="setting-text"><strong>Aprobación de Dani</strong></div><span class="badge badge-warn">Pendiente</span></li>
+        </ul>
+      </section>
+    </div>
+
+  </main>
+</div>
+
+<script src="../shared/js/ui.js"></script>
+<script src="js/general.js"></script>
+</body>
+</html>
