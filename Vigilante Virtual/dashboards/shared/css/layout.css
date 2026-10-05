@@ -135,7 +135,12 @@
     position: relative;
   }
   .nav .count { position: absolute; top: 0; right: 0; margin: 0; }
-  .topbar { padding: 0 var(--sp-4); }
+  .topbar { padding: 0 var(--sp-4); gap: var(--sp-2); }
+  .topbar-site { min-width: 0; }
+  .topbar-site strong, .topbar-site span { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+  .topbar-clock { font-size: var(--fs-md); }
+  .topbar-user { padding-left: var(--sp-2); }
+  .topbar .btn-sm { padding: 0 var(--sp-2); }
   .topbar-user .user-name, .topbar-clock-date { display: none; }
   .main { padding: var(--sp-4); }
 }

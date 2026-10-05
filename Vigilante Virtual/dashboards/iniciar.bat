@@ -5,12 +5,10 @@ cd /d "%~dp0"
 echo.
 echo  Vigilante Virtual - Dashboards
 echo  -------------------------------
-echo  Indice:     http://localhost:5173
-echo  Vigilante:  http://localhost:5173/vigilante/
-echo  Admin:      http://localhost:5173/admin/
-echo  General:    http://localhost:5173/general/
+echo  Ingreso:    http://localhost:5173/login.html
+echo  (la primera vez se definen las claves de cada perfil en este navegador)
 echo.
 echo  Para detener el servidor presiona Ctrl+C o cierra esta ventana.
 echo.
-start "" cmd /c "timeout /t 2 >nul & start http://localhost:5173"
+start "" cmd /c "timeout /t 2 >nul & start http://localhost:5173/login.html"
 python -m http.server 5173

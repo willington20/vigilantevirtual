@@ -3,40 +3,90 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Vigilante Virtual · Dashboards</title>
+  <title>Dashboards · Vigilante Virtual</title>
+  <script src="shared/js/auth.js"></script>
   <link rel="stylesheet" href="shared/css/tokens.css">
   <link rel="stylesheet" href="shared/css/base.css">
+  <link rel="stylesheet" href="shared/css/layout.css">
   <link rel="stylesheet" href="shared/css/components.css">
   <style>
-    main { max-width: 880px; margin: 0 auto; padding: 48px 16px; }
-    .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(240px, 1fr)); gap: 16px; margin-top: 24px; }
-    .choice { display: block; padding: 20px; color: var(--text); text-decoration: none; }
-    a.choice:hover { border-color: var(--accent); text-decoration: none; }
-    .choice h2 { margin: 8px 0 4px; }
+    .hub { max-width: 960px; margin: 0 auto; padding: 32px 16px 48px; }
+    .hub-top { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; margin-bottom: 24px; }
+    .choices { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin-top: 20px; }
+    .choice { display: flex; flex-direction: column; gap: 10px; padding: 20px; color: var(--text); text-decoration: none; border-top: 3px solid var(--c); }
+    a.choice:hover { background: var(--surface-2); text-decoration: none; }
+    .choice .ic { display: grid; place-items: center; width: 40px; height: 40px; border-radius: 10px; background: color-mix(in srgb, var(--c) 18%, transparent); color: var(--c); }
     .choice p { color: var(--text-muted); font-size: var(--fs-sm); }
+    .choice ul { margin: 0; padding-left: 18px; color: var(--text-muted); font-size: var(--fs-xs); }
+    .choice.is-locked { opacity: .5; }
+    .session { display: flex; flex-wrap: wrap; gap: 6px 16px; font-size: var(--fs-sm); color: var(--text-muted); }
   </style>
 </head>
 <body>
-<main>
-  <h1>Vigilante Virtual · Dashboards</h1>
-  <p class="muted" style="margin-top:4px">Índice de desarrollo. Tres dashboards separados, uno por rol.</p>
-  <div class="choices">
-    <a class="card choice" href="vigilante/index.html">
-      <span class="badge badge-ok">Listo para revisión</span>
-      <h2>Vigilante</h2>
-      <p>Guardia de portería: Panel, Accesos, Cámaras, Novedades e Historial.</p>
-    </a>
-    <a class="card choice" href="admin/index.html">
-      <span class="badge badge-ok">Listo para revisión</span>
-      <h2>Administrador del cliente</h2>
-      <p>Configuración de su sitio: personal, destinos, horarios, dispositivos, vigilantes, Argos, privacidad y reportes.</p>
-    </a>
-    <a class="card choice" href="general/index.html">
-      <span class="badge badge-ok">Listo para revisión</span>
-      <h2>General (jefe mayor)</h2>
-      <p>Torre de Control: todos los sitios, incidentes escalados, cámaras, clientes, usuarios, Argos, Ley 1581, despliegues y auditoría.</p>
-    </a>
+<main class="hub">
+  <div class="hub-top">
+    <div>
+      <h1>Dashboards</h1>
+      <p class="muted" style="margin-top:4px">Elige a qué dashboard entrar. Cada perfil solo ve los suyos.</p>
+    </div>
+    <div class="row">
+      <button id="theme-toggle" class="btn btn-icon btn-ghost" type="button" aria-label="Cambiar tema claro u oscuro"><svg class="icon" viewBox="0 0 24 24"><path d="M21 12.8A9 9 0 1 1 11.2 3a7 7 0 0 0 9.8 9.8z"/></svg></button>
+      <button class="btn" type="button" onclick="Auth.logout()">
+        <svg class="icon icon-sm" viewBox="0 0 24 24"><path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4M16 17l5-5-5-5M21 12H9"/></svg>Salir</button>
+    </div>
   </div>
+
+  <section class="card" style="padding:16px">
+    <div class="session">
+      <span>Perfil: <strong id="s-role" style="color:var(--text)">—</strong></span>
+      <span>Ingresó: <span id="s-start" class="mono">—</span></span>
+      <span>La sesión vence: <span id="s-exp" class="mono">—</span></span>
+    </div>
+  </section>
+
+  <div class="choices" id="choices"></div>
+
+  <p class="xsmall faint" style="margin-top:24px">Maqueta: en producción el servidor valida la clave, el segundo factor y el rol en cada petición.</p>
 </main>
+
+<script src="shared/js/ui.js"></script>
+<script>
+  (function () {
+    const s = Auth.session();
+    if (!s) return;
+    const fmt = (t) => new Date(t).toLocaleTimeString("es-CO", { hour: "2-digit", minute: "2-digit", hour12: false });
+    document.getElementById("s-role").textContent = Auth.ROLES[s.role].label;
+    document.getElementById("s-start").textContent = fmt(s.start);
+    document.getElementById("s-exp").textContent = fmt(s.exp);
+
+    const DASH = [
+      { area: "vigilante", href: "vigilante/index.html", color: "#3b82f6", title: "Vigilante",
+        desc: "Puesto del guardia de portería.",
+        items: ["Solicitudes de ingreso y videollamada", "Abrir puertas con confirmación", "Cámaras, novedades e historial"],
+        icon: '<path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/>' },
+      { area: "admin", href: "admin/index.html", color: "#8b5cf6", title: "Administrador del sitio",
+        desc: "Configuración del sitio del cliente.",
+        items: ["Personal, destinos y horarios", "Puertas, cámaras y vigilantes", "Argos, privacidad y reportes"],
+        icon: '<path d="M4 21v-7M4 10V3M12 21v-9M12 8V3M20 21v-5M20 12V3M1 14h6M9 8h6M17 16h6"/>' },
+      { area: "general", href: "general/index.html", color: "#14b8a6", title: "Torre de Control",
+        desc: "Vista del jefe mayor: todos los sitios.",
+        items: ["Monitoreo e incidentes escalados", "Clientes, usuarios y Argos", "Ley 1581, despliegues y auditoría"],
+        icon: '<path d="M22 12h-4l-3 9L9 3l-3 9H2"/>' }
+    ];
+    const esc = (t) => t.replace(/[&<>]/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;" }[c]));
+    document.getElementById("choices").innerHTML = DASH.map((d) => {
+      const ok = Auth.canAccess(s.role, d.area);
+      const inner = `
+        <span class="ic"><svg class="icon icon-lg" viewBox="0 0 24 24">${d.icon}</svg></span>
+        <h2>${esc(d.title)}</h2><p>${esc(d.desc)}</p>
+        <ul>${d.items.map((i) => `<li>${esc(i)}</li>`).join("")}</ul>
+        ${ok ? '<span class="badge badge-ok" style="align-self:flex-start">Entrar</span>'
+             : '<span class="badge badge-offline" style="align-self:flex-start">Sin acceso con este perfil</span>'}`;
+      return ok
+        ? `<a class="card choice" style="--c:${d.color}" href="${d.href}">${inner}</a>`
+        : `<div class="card choice is-locked" style="--c:${d.color}" aria-disabled="true">${inner}</div>`;
+    }).join("");
+  })();
+</script>
 </body>
 </html>
